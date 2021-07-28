@@ -5,9 +5,9 @@ import AppRoutingModule from './app-routing.module';
 
 import AppComponent from './app.component';
 import HeaderComponent from './components/header/header.component';
-import SearchComponent from './components/header/search/search.component';
+import SearchComponent from './components/search/search.component';
 import SearchResultComponent from './components/search-result/search-result.component';
-import CardComponent from './components/search-result/card/card.component';
+import CardComponent from './components/card/card.component';
 
 @NgModule({
   declarations: [
