@@ -1,7 +1,7 @@
 {
   "eslint.options": {
     "extensions": [".js", ".ts", ".html"],
-    "configFile": "../youtube-client/.eslintrc.json"
+    "configFile": "./.eslintrc.json"
   },
   "eslint.validate": [
     "javascript",
