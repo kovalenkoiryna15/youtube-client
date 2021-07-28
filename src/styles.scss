@@ -1,7 +1,11 @@
-/* Global styles */
+/*
+* Global styles
+*/
+
+@use '~@angular/material' as mat;
 
 /*
-* RESET
+* Reset
 */
 
 *,
@@ -12,6 +16,11 @@
 	box-sizing: border-box;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 body {
   font-size: 14px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
@@ -20,3 +29,24 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/*
+* Custom Theming for Angular Material
+* For more information: https://material.angular.io/guide/theming
+*/
+
+@include mat.core();
+
+$primary: mat.define-palette(mat.$indigo-palette);
+$accent: mat.define-palette(mat.$green-palette);
+$warn: mat.define-palette(mat.$red-palette);
+
+$light-theme: mat.define-light-theme((
+  color: (
+    primary: $primary,
+    accent: $accent,
+    warn: $warn,
+  )
+));
+
+@include mat.all-component-themes($light-theme);
