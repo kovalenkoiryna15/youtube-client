@@ -6,21 +6,10 @@ import AppRoutingModule from './app-routing.module';
 import MaterialModule from './material.module';
 
 import AppComponent from './app.component';
-import HeaderComponent from './components/header/header.component';
-import SearchComponent from './components/search/search.component';
-import SearchResultComponent from './components/search-result/search-result.component';
-import CardComponent from './components/card/card.component';
-import LoginComponent from './components/login/login.component';
+import components from './components';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    SearchComponent,
-    SearchResultComponent,
-    CardComponent,
-    LoginComponent,
-  ],
+  declarations: [AppComponent, ...components],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
