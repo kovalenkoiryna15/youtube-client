@@ -5,8 +5,14 @@
   padding: 15px 20px;
 }
 
-.search__container {
+.menu__container {
   flex-basis: 70%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 .login__container {
@@ -14,4 +20,28 @@
   display: flex;
   align-items: center;
   padding-bottom: 1.34375em;
+}
+
+.logo__container,
+.search__container {
+  display: flex;
+  margin: 0 5px;
+}
+
+.logo__container {
+  flex-basis: 40%;
+  height: 100%;
+  justify-content: flex-end;
+  align-items: center;
+  padding-bottom: 1.34375em;
+}
+
+.search__container {
+  flex-basis: 60%;
+}
+
+.logo {
+  font-size: 55px;
+  width: fit-content;
+  height: fit-content;
 }

@@ -1,6 +1,15 @@
-<div class="logo__container">
-  <mat-icon class="logo" color="primary">smart_display</mat-icon>
-</div>
-<div class="search-input__container">
-  <app-search-input></app-search-input>
-</div>
+<form class="search-form">
+  <mat-form-field class="search-form-field" appearance="fill">
+    <mat-label>What are you want to find out?</mat-label>
+    <input matInput type="text" value="{{ value }}" />
+    <button
+      *ngIf="value"
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      (click)="onClear()"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+</form>

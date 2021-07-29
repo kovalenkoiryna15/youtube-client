@@ -5,4 +5,10 @@ import { Component } from '@angular/core';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })
-export default class SearchComponent {}
+export default class SearchComponent {
+  public value: string = '';
+
+  onClear() {
+    this.value = '';
+  }
+}
