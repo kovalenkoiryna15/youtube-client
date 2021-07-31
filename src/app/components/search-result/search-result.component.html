@@ -1,2 +1,7 @@
 <p>search-result works!</p>
-<app-search-item></app-search-item>
+<ng-container *ngIf="searchResultList.length > 0">
+  <app-search-item
+    *ngFor="let searchItem of searchResultList"
+    [searchItem]="searchItem"
+  ></app-search-item>
+</ng-container>
