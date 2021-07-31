@@ -1,0 +1,31 @@
+:host {
+  display: flex;
+  width: 100%;
+}
+
+.search-form {
+  flex-basis: 80%;
+}
+
+.search-form-field {
+  width: 100%;
+  padding: 0;
+}
+
+.button {
+  cursor: pointer;
+}
+
+.button:hover,
+.button:focus,
+.button:active {
+  filter: brightness(85%);
+}
+
+.button_without-border {
+  border: none;
+}
+
+.button_circle {
+  border-radius: 50%;
+}

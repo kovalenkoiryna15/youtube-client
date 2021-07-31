@@ -30,6 +30,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+button,
+button:focus,
+button:active:focus,
+button.active:focus {
+  outline: none !important;
+  outline-style: none !important;
+}
+
 /*
 * Custom Theming for Angular Material
 * For more information: https://material.angular.io/guide/theming
