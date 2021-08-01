@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export default class AppComponent {
-  title = 'youtube-client';
+  public title: string = 'youtube-client';
+
+  private isDarkTheme: boolean = true;
+
+  @HostBinding('class.dark-style') get theme(): boolean {
+    return this.isDarkTheme;
+  }
 }

@@ -1,25 +1,23 @@
+@use '~@angular/material' as mat;
+$dark-accent-color: mat.get-color-from-palette(mat.$amber-palette, 200);
+
 :host {
   display: flex;
   width: 100%;
 }
 
 .search-form {
-  flex-basis: 80%;
+  flex-basis: 100%;
 }
 
 .search-form-field {
-  width: 100%;
-  padding: 0;
-}
-
-.button {
-  cursor: pointer;
+  width: 80%;
 }
 
 .button:hover,
 .button:focus,
 .button:active {
-  filter: brightness(85%);
+  color: $dark-accent-color;
 }
 
 .button_without-border {
