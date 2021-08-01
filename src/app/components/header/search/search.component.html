@@ -1,0 +1,21 @@
+<form class="search-form" [formGroup]="searchFormGroup">
+  <mat-form-field class="search-form-field" appearance="fill">
+    <mat-label>What are you want to find out?</mat-label>
+    <input
+      matInput
+      type="text"
+      formControlName="searchInput"
+      autocomplete="off"
+      #searchInput
+    />
+    <button
+      *ngIf="searchInput.value"
+      matSuffix
+      class="button button_circle button_without-border"
+      aria-label="Clear"
+      (click)="onClear()"
+    >
+      <mat-icon>clear</mat-icon>
+    </button>
+  </mat-form-field>
+</form>
