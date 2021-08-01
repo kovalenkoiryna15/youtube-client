@@ -8,6 +8,7 @@
 }
 
 .chip-input {
+  flex-basis: 40%;
+  min-width: fit-content;
   padding: 0 15px;
-  flex-grow: 2;
 }
