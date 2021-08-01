@@ -1,5 +1,5 @@
 @use '~@angular/material' as mat;
-$dark-accent-color: mat.get-color-from-palette(mat.$amber-palette, 200);
+$dark-default-color: mat.get-color-from-palette(mat.$deep-purple-palette, 200);
 
 :host {
   display: flex;
@@ -8,16 +8,20 @@ $dark-accent-color: mat.get-color-from-palette(mat.$amber-palette, 200);
 
 .search-form {
   flex-basis: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
 }
 
 .search-form-field {
   width: 80%;
+  margin: 0 15px;
 }
 
 .button:hover,
 .button:focus,
 .button:active {
-  color: $dark-accent-color;
+  color: $dark-default-color;
 }
 
 .button_without-border {

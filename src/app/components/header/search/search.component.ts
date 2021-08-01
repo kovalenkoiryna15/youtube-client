@@ -14,8 +14,6 @@ interface FormData {
 export default class SearchComponent implements OnDestroy {
   public formData?: FormData;
 
-  public isDarkTheme: boolean = true;
-
   public formValueSubscription: Subscription;
 
   public searchFormGroup: FormGroup = this.fb.group({

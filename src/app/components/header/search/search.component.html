@@ -1,5 +1,5 @@
 <form class="search-form" [formGroup]="searchFormGroup" (ngSubmit)="onSubmit()">
-  <mat-form-field class="search-form-field" color="accent">
+  <mat-form-field class="search-form-field">
     <mat-label>What are you want to find out?</mat-label>
     <input
       matInput
@@ -15,14 +15,13 @@
       matSuffix
       color="primary"
       class="button button_circle button_without-border button_suffix"
-      [class.dark-style]="isDarkTheme"
       aria-label="Clear"
       (click)="onClear()"
     >
       <mat-icon class="mat-icon">clear</mat-icon>
     </button>
   </mat-form-field>
-  <button mat-button type="submit" color="primary" class="button">
+  <button mat-button type="submit">
     <mat-icon>search</mat-icon>
   </button>
 </form>

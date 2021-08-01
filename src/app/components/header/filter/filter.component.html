@@ -1,1 +1,28 @@
-<p>filter works!</p>
+<label>Sort by:</label>
+<mat-radio-group [(ngModel)]="labelPosition">
+  <mat-checkbox class="checkbox" value="date">Date</mat-checkbox>
+  <mat-checkbox class="checkbox" value="viewsCount">
+    Count of views
+  </mat-checkbox>
+</mat-radio-group>
+<mat-form-field class="chip-input">
+  <mat-chip-list #chipList>
+    <mat-chip
+      *ngFor="let chip of chips"
+      [selectable]="selectable"
+      [removable]="removable"
+      (removed)="remove(chip)"
+    >
+      {{ chip }}
+      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+    </mat-chip>
+    <input
+      [formControl]="chipCtrl"
+      placeholder="by word or sentance..."
+      autocomplete="off"
+      [matChipInputFor]="chipList"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      (matChipInputTokenEnd)="add($event)"
+    />
+  </mat-chip-list>
+</mat-form-field>

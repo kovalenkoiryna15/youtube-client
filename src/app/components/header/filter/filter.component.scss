@@ -1,0 +1,13 @@
+:host {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox {
+  padding: 0 10px;
+}
+
+.chip-input {
+  padding: 0 15px;
+  flex-grow: 2;
+}
