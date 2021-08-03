@@ -1,7 +1,7 @@
 <ng-container *ngIf="searchResultList.length > 0">
   <div class="search-result__container">
-    <ng-container #filter *ngIf="isSettingsActive">
-      <div class="filter__container">
+    <ng-container *ngIf="isSettingsActive">
+      <div class="settings__container">
         <app-settings></app-settings>
       </div>
     </ng-container>

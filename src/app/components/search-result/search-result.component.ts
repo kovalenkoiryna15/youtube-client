@@ -36,5 +36,7 @@ export default class SearchResultComponent {
     this.videoService
       .search()
       .subscribe((result) => (this.searchResultList = result));
+
+    console.log(filterPipe);
   }
 }

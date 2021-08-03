@@ -3,11 +3,12 @@
   flex-direction: column;
 }
 
-.filter__container {
+.settings__container {
   display: flex;
   justify-content: center;
   flex-basis: 100%;
   padding: 0 10% 30px 10%;
+  min-height: 75px;
 }
 
 .search-result__content {

@@ -7,7 +7,7 @@ import LogoComponent from './header/logo/logo.component';
 import SettingsButtonComponent from './header/settings-button/settings-button.component';
 import FilterByTagsComponent from './search-result/settings/filter-by-tags/filter-by-tags.component';
 import SettingsComponent from './search-result/settings/settings.component';
-import SortOptionComponent from './search-result/settings/sort-option/sort-option.component';
+import SortDirectionComponent from './search-result/settings/sort-direction/sort-direction.component';
 
 const components = [
   HeaderComponent,
@@ -19,7 +19,7 @@ const components = [
   FilterByTagsComponent,
   SettingsButtonComponent,
   SettingsComponent,
-  SortOptionComponent,
+  SortDirectionComponent,
 ];
 
 export default components;

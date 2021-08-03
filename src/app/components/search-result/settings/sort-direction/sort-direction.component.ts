@@ -2,11 +2,11 @@ import { Component, Output, EventEmitter } from '@angular/core';
 import { SortDirections } from 'src/app/common/constants/settings';
 
 @Component({
-  selector: 'app-sort-option',
-  templateUrl: './sort-option.component.html',
-  styleUrls: ['./sort-option.component.scss'],
+  selector: 'app-sort-direction',
+  templateUrl: './sort-direction.component.html',
+  styleUrls: ['./sort-direction.component.scss'],
 })
-export default class SortOptionComponent {
+export default class SortDirectionComponent {
   public isInIncresingOrder: boolean = false;
 
   @Output() changeOderDirection: EventEmitter<

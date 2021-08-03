@@ -21,7 +21,7 @@ import SettingsService from './services/settings.service';
     ReactiveFormsModule,
     AppRoutingModule,
   ],
-  providers: [SettingsService, VideoService],
+  providers: [SettingsService, VideoService, FilterByPipe],
   bootstrap: [AppComponent],
 })
 export default class AppModule {}

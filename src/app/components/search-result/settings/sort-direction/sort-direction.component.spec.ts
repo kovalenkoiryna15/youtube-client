@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import SortOptionComponent from './sort-option.component';
+import SortDirectionComponent from './sort-direction.component';
 
 describe('SortOptionComponent', () => {
-  let component: SortOptionComponent;
-  let fixture: ComponentFixture<SortOptionComponent>;
+  let component: SortDirectionComponent;
+  let fixture: ComponentFixture<SortDirectionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SortOptionComponent],
+      declarations: [SortDirectionComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SortOptionComponent);
+    fixture = TestBed.createComponent(SortDirectionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

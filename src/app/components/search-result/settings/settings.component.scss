@@ -1,0 +1,17 @@
+:host {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.sort-option__list {
+  display: flex;
+  height: 100%;
+}
+
+.sort-option {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 50px 0 10px;
+}
