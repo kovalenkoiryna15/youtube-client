@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import {
+  SearchItemModel,
   FilterOption,
   MatchOption,
   SortOption,
-} from 'src/app/common/models/filter-option.model';
-import AppService from 'src/app/services/app.service';
-import VideoService from 'src/app/services/video.service';
-import { SearchItemModel } from '../../common/models/search-item.model';
+} from '../../common/models';
+import AppService from '../../services/app.service';
+import VideoService from '../../services/video.service';
 
 @Component({
   selector: 'app-search-result',

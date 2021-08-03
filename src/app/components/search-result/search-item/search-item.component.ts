@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { SearchItemModel } from '../../../common/models/search-item.model';
+import { SearchItemModel } from '../../../common/models/search-item-model';
 
 @Component({
   selector: 'app-search-item',
