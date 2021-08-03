@@ -9,7 +9,9 @@ import { SortDirections } from 'src/app/common/constants/settings';
 export default class SortOptionComponent {
   public isInIncresingOrder: boolean = false;
 
-  @Output() changeOderDirection: EventEmitter<string> = new EventEmitter();
+  @Output() changeOderDirection: EventEmitter<
+    SortDirections.Increase | SortDirections.Decrease
+  > = new EventEmitter();
 
   togleOrderDirection() {
     this.isInIncresingOrder = !this.isInIncresingOrder;

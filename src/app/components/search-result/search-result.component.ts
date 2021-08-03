@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import FilterByPipe from 'src/app/pipes/filter-by.pipe';
 import {
   FilterOption,
   SearchItemModel,
   SettingsOption,
   SortOption,
 } from '../../common/models';
-import AppService from '../../services/app.service';
+import SettingsService from '../../services/settings.service';
 import VideoService from '../../services/video.service';
 
 @Component({
@@ -18,16 +19,19 @@ export default class SearchResultComponent {
 
   public isSettingsActive: boolean = false;
 
-  public string = 'change';
-
-  public settingsOptions?: (SettingsOption | SortOption | FilterOption)[];
+  public settingsOptions: (SettingsOption | SortOption | FilterOption)[] = [];
 
   constructor(
-    private appService: AppService,
-    private videoService: VideoService
+    private settingsService: SettingsService,
+    private videoService: VideoService,
+    private filterPipe: FilterByPipe
   ) {
-    this.appService.isSettingsActive.subscribe(
+    this.settingsService.isSettingsActive.subscribe(
       (status: boolean) => (this.isSettingsActive = status)
+    );
+    this.settingsService.settingsOptions.subscribe(
+      (options: (SettingsOption | SortOption | FilterOption)[]) =>
+        (this.settingsOptions = options)
     );
     this.videoService
       .search()

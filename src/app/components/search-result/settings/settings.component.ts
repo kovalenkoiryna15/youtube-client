@@ -2,6 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { SortDirections } from 'src/app/common/constants/settings';
+import SettingsService from 'src/app/services/settings.service';
 
 interface FormData {
   isDate: boolean;
@@ -24,27 +25,41 @@ export default class SettingsComponent implements OnDestroy {
     viewCount: false,
   });
 
-  public sub: Subscription;
+  public subscriptionToFormValues: Subscription;
 
-  viewCountSortDirection: string = SortDirections.Increase;
+  viewCountSortDirection: SortDirections.Increase | SortDirections.Decrease =
+    SortDirections.Increase;
 
-  dateSortDirection: string = SortDirections.Decrease;
+  dateSortDirection: SortDirections.Increase | SortDirections.Decrease =
+    SortDirections.Decrease;
 
-  constructor(private fb: FormBuilder) {
-    this.sub = this.sortOptions.valueChanges.subscribe((data) => {
-      this.formData = { isDate: data.date, isViewCount: data.viewCount };
-    });
+  constructor(
+    private fb: FormBuilder,
+    private settingsService: SettingsService
+  ) {
+    this.subscriptionToFormValues = this.sortOptions.valueChanges.subscribe(
+      (data) => {
+        this.formData = { isDate: data.date, isViewCount: data.viewCount };
+        this.settingsService.settingsOptions.next();
+      }
+    );
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    this.subscriptionToFormValues.unsubscribe();
   }
 
-  changeViewCountSortDirection(value: string) {
+  changeViewCountSortDirection(
+    value: SortDirections.Increase | SortDirections.Decrease
+  ) {
     this.viewCountSortDirection = value;
+    this.settingsService.settingsOptions.next();
   }
 
-  changeDateSortDirection(value: string) {
+  changeDateSortDirection(
+    value: SortDirections.Increase | SortDirections.Decrease
+  ) {
     this.dateSortDirection = value;
+    this.settingsService.settingsOptions.next();
   }
 }

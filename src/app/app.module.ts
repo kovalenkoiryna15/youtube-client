@@ -9,7 +9,7 @@ import AppComponent from './app.component';
 import components from './components';
 import FilterByPipe from './pipes/filter-by.pipe';
 import VideoService from './services/video.service';
-import AppService from './services/app.service';
+import SettingsService from './services/settings.service';
 
 @NgModule({
   declarations: [AppComponent, ...components, FilterByPipe],
@@ -21,7 +21,7 @@ import AppService from './services/app.service';
     ReactiveFormsModule,
     AppRoutingModule,
   ],
-  providers: [AppService, VideoService],
+  providers: [SettingsService, VideoService],
   bootstrap: [AppComponent],
 })
 export default class AppModule {}

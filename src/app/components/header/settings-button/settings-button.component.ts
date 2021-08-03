@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import AppService from 'src/app/services/app.service';
+import SettingsService from 'src/app/services/settings.service';
 
 @Component({
   selector: 'app-settings-button',
@@ -9,10 +9,10 @@ import AppService from 'src/app/services/app.service';
 export default class SettingsButtonComponent {
   public isSettingsActive: boolean = false;
 
-  constructor(private appService: AppService) {}
+  constructor(private settingsService: SettingsService) {}
 
   onChange() {
     this.isSettingsActive = !this.isSettingsActive;
-    this.appService.isSettingsActive.next(this.isSettingsActive);
+    this.settingsService.isSettingsActive.next(this.isSettingsActive);
   }
 }
