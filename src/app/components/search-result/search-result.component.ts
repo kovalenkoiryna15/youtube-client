@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SearchItemModel } from './search-item/search-item.model';
-
-import MOCK_RESPONSE from '../../mocks/response.json';
+import VideoService from 'src/app/services/video.service';
+import { SearchItemModel } from '../../common/models/search-item.model';
 
 @Component({
   selector: 'app-search-result',
@@ -11,7 +10,11 @@ import MOCK_RESPONSE from '../../mocks/response.json';
 export default class SearchResultComponent implements OnInit {
   public searchResultList: SearchItemModel[] = [];
 
+  constructor(public videoService: VideoService) {}
+
   ngOnInit() {
-    this.searchResultList = MOCK_RESPONSE.items;
+    this.videoService
+      .search()
+      .subscribe((result) => (this.searchResultList = result));
   }
 }

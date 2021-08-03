@@ -8,6 +8,7 @@ import MaterialModule from './material/material.module';
 
 import AppComponent from './app.component';
 import components from './components';
+import VideoService from './services/video.service';
 
 @NgModule({
   declarations: [AppComponent, ...components],
@@ -19,7 +20,7 @@ import components from './components';
     ReactiveFormsModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [VideoService],
   bootstrap: [AppComponent],
 })
 export default class AppModule {}

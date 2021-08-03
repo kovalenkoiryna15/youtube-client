@@ -1,6 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import VideoService from 'src/app/services/video.service';
 
 interface FormData {
   searchInput: string | null;
@@ -20,7 +21,7 @@ export default class SearchComponent implements OnDestroy {
     searchInput: [''],
   });
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, public videoService: VideoService) {
     this.formValueSubscription = this.searchFormGroup.valueChanges.subscribe(
       (value: FormData) => {
         this.formData = value;
@@ -37,19 +38,17 @@ export default class SearchComponent implements OnDestroy {
   }
 
   onSubmit() {
-    if (this.formData?.searchInput) {
-      this.search();
-    }
+    this.search();
   }
 
   onKeyDown(event: Event) {
     event.preventDefault();
-    if (this.formData?.searchInput) {
-      this.search();
-    }
+    this.search();
   }
 
   search() {
-    console.log(this.formData);
+    if (this.formData?.searchInput) {
+      this.videoService.searchValue.next(this.formData.searchInput);
+    }
   }
 }
