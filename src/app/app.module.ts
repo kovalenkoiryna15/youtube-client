@@ -5,13 +5,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import AppRoutingModule from './app-routing.module';
 import MaterialModule from './material/material.module';
-
 import AppComponent from './app.component';
 import components from './components';
+import FilterByPipe from './pipes/filter-by.pipe';
 import VideoService from './services/video.service';
+import AppService from './services/app.service';
 
 @NgModule({
-  declarations: [AppComponent, ...components],
+  declarations: [AppComponent, ...components, FilterByPipe],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -20,7 +21,7 @@ import VideoService from './services/video.service';
     ReactiveFormsModule,
     AppRoutingModule,
   ],
-  providers: [VideoService],
+  providers: [AppService, VideoService],
   bootstrap: [AppComponent],
 })
 export default class AppModule {}

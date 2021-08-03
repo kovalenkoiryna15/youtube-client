@@ -1,6 +1,16 @@
 <ng-container *ngIf="searchResultList.length > 0">
-  <app-search-item
-    *ngFor="let searchItem of searchResultList"
-    [searchItem]="searchItem"
-  ></app-search-item>
+  <div class="search-result__container">
+    <ng-container #filter *ngIf="isFilterActive">
+      <div class="filter__container">
+        <app-filter></app-filter>
+      </div>
+    </ng-container>
+
+    <div class="search-result__content">
+      <app-search-item
+        *ngFor="let searchItem of searchResultList"
+        [searchItem]="searchItem"
+      ></app-search-item>
+    </div>
+  </div>
 </ng-container>

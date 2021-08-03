@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 
@@ -9,9 +9,9 @@ import { MatChipInputEvent } from '@angular/material/chips';
   styleUrls: ['./filter.component.scss'],
 })
 export default class FilterComponent {
-  public labelPosition?: string;
+  public filterOption: string = '';
 
-  separatorKeysCodes: number[] = [ENTER, COMMA];
+  public separatorKeysCodes: number[] = [ENTER, COMMA];
 
   public chips: string[] = [];
 
@@ -19,7 +19,14 @@ export default class FilterComponent {
 
   public removable: boolean = true;
 
-  public chipCtrl = new FormControl();
+  public chipControl = new FormControl();
+
+  public filterOptions: FormGroup = this.fb.group({
+    date: false,
+    viewCount: false,
+  });
+
+  constructor(private fb: FormBuilder) {}
 
   remove(fruit: string): void {
     const index = this.chips.indexOf(fruit);
@@ -38,6 +45,6 @@ export default class FilterComponent {
 
     event.chipInput!.clear();
 
-    this.chipCtrl.setValue(null);
+    this.chipControl.setValue(null);
   }
 }

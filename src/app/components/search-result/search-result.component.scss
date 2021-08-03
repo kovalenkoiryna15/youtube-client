@@ -1,4 +1,16 @@
-:host {
+.search-result__container {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter__container {
+  display: flex;
+  justify-content: center;
+  flex-basis: 100%;
+  padding: 0 10% 30px 10%;
+}
+
+.search-result__content {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, auto));
   width: 90%;

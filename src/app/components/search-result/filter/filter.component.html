@@ -1,7 +1,7 @@
 <label>Sort by:</label>
-<mat-radio-group [(ngModel)]="labelPosition">
-  <mat-checkbox class="checkbox" value="date">Date</mat-checkbox>
-  <mat-checkbox class="checkbox" value="viewsCount">
+<mat-radio-group [formGroup]="filterOptions">
+  <mat-checkbox class="checkbox" formControlName="date">Date</mat-checkbox>
+  <mat-checkbox class="checkbox" formControlName="viewCount">
     Count of views
   </mat-checkbox>
 </mat-radio-group>
@@ -17,7 +17,7 @@
       <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
     </mat-chip>
     <input
-      [formControl]="chipCtrl"
+      [formControl]="chipControl"
       placeholder="by word or sentance..."
       autocomplete="off"
       [matChipInputFor]="chipList"

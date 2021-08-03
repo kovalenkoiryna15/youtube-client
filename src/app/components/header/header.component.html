@@ -6,15 +6,9 @@
     <app-search></app-search>
   </div>
   <div class="settings__container">
-    <app-settings (toggleFilter)="toggleFilter($event)"></app-settings>
+    <app-settings></app-settings>
   </div>
   <div class="login__container">
     <app-login></app-login>
   </div>
 </div>
-
-<ng-container #filter *ngIf="isFilterActive">
-  <div class="filter__container">
-    <app-filter></app-filter>
-  </div>
-</ng-container>

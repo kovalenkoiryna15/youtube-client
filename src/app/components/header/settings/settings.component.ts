@@ -1,4 +1,5 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
+import AppService from 'src/app/services/app.service';
 
 @Component({
   selector: 'app-settings',
@@ -6,12 +7,12 @@ import { Component, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./settings.component.scss'],
 })
 export default class SettingsComponent {
-  @Output() toggleFilter: EventEmitter<boolean> = new EventEmitter<boolean>();
-
   public isSettingsActive: boolean = false;
+
+  constructor(private appService: AppService) {}
 
   onChange() {
     this.isSettingsActive = !this.isSettingsActive;
-    this.toggleFilter.emit(this.isSettingsActive);
+    this.appService.isFilterActive.next(this.isSettingsActive);
   }
 }
