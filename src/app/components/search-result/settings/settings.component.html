@@ -1,0 +1,24 @@
+<label>Sort by:</label>
+<mat-radio-group [formGroup]="sortOptions">
+  <section>
+    <mat-checkbox class="checkbox" formControlName="date"> Date </mat-checkbox>
+    <ng-container *ngIf="formData.isDate">
+      <app-sort-option
+        (changeOderDirection)="changeDateSortDirection($event)"
+      ></app-sort-option>
+    </ng-container>
+  </section>
+
+  <section>
+    <mat-checkbox class="checkbox" formControlName="viewCount">
+      Count of views
+    </mat-checkbox>
+    <ng-container *ngIf="formData.isViewCount">
+      <app-sort-option
+        (changeOderDirection)="changeViewCountSortDirection($event)"
+      ></app-sort-option>
+    </ng-container>
+  </section>
+</mat-radio-group>
+
+<app-filter-by-tags></app-filter-by-tags>

@@ -1,0 +1,11 @@
+<ng-container *ngIf="isInIncresingOrder">
+  <button mat-mini-fab (click)="togleOrderDirection()">
+    <mat-icon>trending_up</mat-icon>
+  </button>
+</ng-container>
+
+<ng-container *ngIf="!isInIncresingOrder">
+  <button mat-mini-fab (click)="togleOrderDirection()">
+    <mat-icon>trending_down</mat-icon>
+  </button>
+</ng-container>

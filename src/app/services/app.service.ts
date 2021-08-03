@@ -3,5 +3,5 @@ import { Subject } from 'rxjs';
 
 @Injectable()
 export default class AppService {
-  public isFilterActive: Subject<boolean> = new Subject();
+  public isSettingsActive: Subject<boolean> = new Subject();
 }

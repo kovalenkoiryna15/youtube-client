@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import {
-  SearchItemModel,
   FilterOption,
-  MatchOption,
+  SearchItemModel,
+  SettingsOption,
   SortOption,
 } from '../../common/models';
 import AppService from '../../services/app.service';
@@ -16,18 +16,18 @@ import VideoService from '../../services/video.service';
 export default class SearchResultComponent {
   public searchResultList: SearchItemModel[] = [];
 
-  public isFilterActive: boolean = false;
+  public isSettingsActive: boolean = false;
 
   public string = 'change';
 
-  public filterOptions?: (FilterOption | SortOption | MatchOption)[];
+  public settingsOptions?: (SettingsOption | SortOption | FilterOption)[];
 
   constructor(
     private appService: AppService,
     private videoService: VideoService
   ) {
-    this.appService.isFilterActive.subscribe(
-      (status: boolean) => (this.isFilterActive = status)
+    this.appService.isSettingsActive.subscribe(
+      (status: boolean) => (this.isSettingsActive = status)
     );
     this.videoService
       .search()

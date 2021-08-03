@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 
 @Component({
-  selector: 'app-filter',
-  templateUrl: './filter.component.html',
-  styleUrls: ['./filter.component.scss'],
+  selector: 'app-filter-by-tags',
+  templateUrl: './filter-by-tags.component.html',
+  styleUrls: ['./filter-by-tags.component.scss'],
 })
-export default class FilterComponent {
+export default class FilterByTagsComponent {
   public filterOption: string = '';
 
   public separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -20,13 +20,6 @@ export default class FilterComponent {
   public removable: boolean = true;
 
   public chipControl = new FormControl();
-
-  public filterOptions: FormGroup = this.fb.group({
-    date: false,
-    viewCount: false,
-  });
-
-  constructor(private fb: FormBuilder) {}
 
   remove(fruit: string): void {
     const index = this.chips.indexOf(fruit);

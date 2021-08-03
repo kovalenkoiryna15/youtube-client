@@ -1,2 +1,2 @@
 export * from './search-item-model';
-export * from './filter-option-model';
+export * from './settings-options-model';

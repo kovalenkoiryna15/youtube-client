@@ -4,8 +4,10 @@ import SearchResultComponent from './search-result/search-result.component';
 import SearchItemComponent from './search-result/search-item/search-item.component';
 import LoginComponent from './header/login/login.component';
 import LogoComponent from './header/logo/logo.component';
-import FilterComponent from './search-result/filter/filter.component';
-import SettingsComponent from './header/settings/settings.component';
+import SettingsButtonComponent from './header/settings-button/settings-button.component';
+import FilterByTagsComponent from './search-result/settings/filter-by-tags/filter-by-tags.component';
+import SettingsComponent from './search-result/settings/settings.component';
+import SortOptionComponent from './search-result/settings/sort-option/sort-option.component';
 
 const components = [
   HeaderComponent,
@@ -14,8 +16,10 @@ const components = [
   SearchItemComponent,
   LoginComponent,
   LogoComponent,
-  FilterComponent,
+  FilterByTagsComponent,
+  SettingsButtonComponent,
   SettingsComponent,
+  SortOptionComponent,
 ];
 
 export default components;
