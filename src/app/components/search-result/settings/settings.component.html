@@ -1,8 +1,10 @@
 <label>Sort by:</label>
 <mat-radio-group [formGroup]="sortOptions" class="sort-option__list">
   <section class="sort-option">
-    <mat-checkbox class="checkbox" formControlName="date"> Date </mat-checkbox>
-    <ng-container *ngIf="this.sortByDateOption.enabled">
+    <mat-checkbox class="checkbox" formControlName="dateControl">
+      Date
+    </mat-checkbox>
+    <ng-container *ngIf="sortByDateOption.enabled">
       <app-sort-direction
         (changeOderDirection)="changeDateSortDirection($event)"
       ></app-sort-direction>
@@ -10,10 +12,10 @@
   </section>
 
   <section class="sort-option">
-    <mat-checkbox class="checkbox" formControlName="viewCount">
+    <mat-checkbox class="checkbox" formControlName="viewCountControl">
       Count of views
     </mat-checkbox>
-    <ng-container *ngIf="this.sortByViewCountOption.enabled">
+    <ng-container *ngIf="sortByViewCountOption.enabled">
       <app-sort-direction
         (changeOderDirection)="changeViewCountSortDirection($event)"
       ></app-sort-direction>
