@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { SearchItemModel } from '../../../common/models/search-item-model';
 
 @Component({
@@ -12,18 +7,6 @@ import { SearchItemModel } from '../../../common/models/search-item-model';
   styleUrls: ['./search-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class SearchItemComponent implements OnInit {
+export default class SearchItemComponent {
   @Input() public searchItem!: SearchItemModel;
-
-  public date: string = '';
-
-  ngOnInit() {
-    this.date = new Date(this.searchItem.snippet.publishedAt).toLocaleString(
-      'ru-RU',
-      {
-        timeZone: 'UTC',
-        hour12: true,
-      }
-    );
-  }
 }
