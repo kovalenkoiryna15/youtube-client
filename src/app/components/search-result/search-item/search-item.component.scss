@@ -4,6 +4,18 @@
   margin-bottom: 20px;
 }
 
+.search-item_recent {
+  border-bottom: 4px solid blue;
+}
+
+.search-item_less-than-month {
+  border-bottom: 4px solid green;
+}
+
+.search-item_long-ago {
+  border-bottom: 4px solid red;
+}
+
 .card .content__container {
   width: 100%;
   height: 100%;
