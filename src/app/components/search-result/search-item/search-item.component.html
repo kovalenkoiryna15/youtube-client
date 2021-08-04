@@ -6,22 +6,27 @@
       [width]="searchItem.snippet.thumbnails.default.width"
       [height]="searchItem.snippet.thumbnails.default.height"
     />
-    <mat-card-content class="statistics">
-      <div class="statistics__item">
-        <mat-icon>visibility</mat-icon>
-        <span>{{ searchItem.statistics.viewCount }}</span>
-      </div>
-      <div class="statistics__item">
-        <mat-icon>favorite</mat-icon>
-        <span>{{ searchItem.statistics.likeCount }}</span>
-      </div>
-      <div class="statistics__item">
-        <mat-icon>thumb_down</mat-icon>
-        <span>{{ searchItem.statistics.dislikeCount }}</span>
-      </div>
-      <div class="statistics__item">
-        <mat-icon>chat</mat-icon>
-        <span>{{ searchItem.statistics.commentCount }}</span>
+    <mat-card-content>
+      <section class="statistics">
+        <div class="statistics__item">
+          <mat-icon>visibility</mat-icon>
+          <span>{{ searchItem.statistics.viewCount }}</span>
+        </div>
+        <div class="statistics__item">
+          <mat-icon>favorite</mat-icon>
+          <span>{{ searchItem.statistics.likeCount }}</span>
+        </div>
+        <div class="statistics__item">
+          <mat-icon>thumb_down</mat-icon>
+          <span>{{ searchItem.statistics.dislikeCount }}</span>
+        </div>
+        <div class="statistics__item">
+          <mat-icon>chat</mat-icon>
+          <span>{{ searchItem.statistics.commentCount }}</span>
+        </div>
+      </section>
+      <div>
+        <span>{{ date }}</span>
       </div>
     </mat-card-content>
     <mat-card-header>

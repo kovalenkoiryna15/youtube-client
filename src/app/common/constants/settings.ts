@@ -1,5 +1,6 @@
 export enum FilterOptions {
   ByTags = 'tags',
+  ByTitle = 'title',
 }
 
 export enum SortOptions {

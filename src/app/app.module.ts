@@ -7,12 +7,13 @@ import AppRoutingModule from './app-routing.module';
 import MaterialModule from './material/material.module';
 import AppComponent from './app.component';
 import components from './components';
-import FilterByPipe from './pipes/filter-by.pipe';
 import VideoService from './services/video.service';
 import SettingsService from './services/settings.service';
+import SortPipe from './pipes/sort.pipe';
+import FilterPipe from './pipes/filter.pipe';
 
 @NgModule({
-  declarations: [AppComponent, ...components, FilterByPipe],
+  declarations: [AppComponent, ...components, FilterPipe, SortPipe],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -21,7 +22,7 @@ import SettingsService from './services/settings.service';
     ReactiveFormsModule,
     AppRoutingModule,
   ],
-  providers: [SettingsService, VideoService, FilterByPipe],
+  providers: [SettingsService, VideoService, FilterPipe, SortPipe],
   bootstrap: [AppComponent],
 })
 export default class AppModule {}

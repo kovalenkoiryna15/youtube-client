@@ -1,13 +1,9 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { SortDirections } from 'src/app/common/constants/settings';
+import { SortDirections, SortOptions } from 'src/app/common/constants/settings';
+import { SortOption } from 'src/app/common/models';
 import SettingsService from 'src/app/services/settings.service';
-
-interface FormData {
-  isDate: boolean;
-  isViewCount: boolean;
-}
 
 @Component({
   selector: 'app-settings',
@@ -15,11 +11,6 @@ interface FormData {
   styleUrls: ['./settings.component.scss'],
 })
 export default class SettingsComponent implements OnDestroy {
-  public formData: FormData = {
-    isDate: false,
-    isViewCount: false,
-  };
-
   public sortOptions: FormGroup = this.fb.group({
     date: false,
     viewCount: false,
@@ -27,11 +18,17 @@ export default class SettingsComponent implements OnDestroy {
 
   public subscriptionToFormValues: Subscription;
 
-  viewCountSortDirection: SortDirections.Increase | SortDirections.Decrease =
-    SortDirections.Increase;
+  public sortByDateOption: SortOption = {
+    name: SortOptions.ByDate,
+    sortDirection: SortDirections.Decrease,
+    enabled: false,
+  };
 
-  dateSortDirection: SortDirections.Increase | SortDirections.Decrease =
-    SortDirections.Decrease;
+  public sortByViewCountOption: SortOption = {
+    name: SortOptions.ByViewCount,
+    sortDirection: SortDirections.Decrease,
+    enabled: false,
+  };
 
   constructor(
     private fb: FormBuilder,
@@ -39,8 +36,14 @@ export default class SettingsComponent implements OnDestroy {
   ) {
     this.subscriptionToFormValues = this.sortOptions.valueChanges.subscribe(
       (data) => {
-        this.formData = { isDate: data.date, isViewCount: data.viewCount };
-        this.settingsService.settingsOptions.next();
+        if (this.sortByDateOption.enabled !== data.date) {
+          this.sortByDateOption.enabled = data.date;
+          this.settingsService.sortByDate.next(this.sortByDateOption);
+        }
+        if (this.sortByViewCountOption.enabled !== data.viewCount) {
+          this.sortByViewCountOption.enabled = data.viewCount;
+          this.settingsService.sortByViewCount.next(this.sortByViewCountOption);
+        }
       }
     );
   }
@@ -52,14 +55,14 @@ export default class SettingsComponent implements OnDestroy {
   changeViewCountSortDirection(
     value: SortDirections.Increase | SortDirections.Decrease
   ) {
-    this.viewCountSortDirection = value;
-    this.settingsService.settingsOptions.next();
+    this.sortByViewCountOption.sortDirection = value;
+    this.settingsService.sortByViewCount.next(this.sortByViewCountOption);
   }
 
   changeDateSortDirection(
     value: SortDirections.Increase | SortDirections.Decrease
   ) {
-    this.dateSortDirection = value;
-    this.settingsService.settingsOptions.next();
+    this.sortByDateOption.sortDirection = value;
+    this.settingsService.sortByDate.next(this.sortByDateOption);
   }
 }

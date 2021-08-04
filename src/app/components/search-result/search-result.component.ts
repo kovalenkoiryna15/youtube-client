@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import FilterByPipe from 'src/app/pipes/filter-by.pipe';
+import { Subject } from 'rxjs';
+import FilterPipe from 'src/app/pipes/filter.pipe';
+import SortPipe from 'src/app/pipes/sort.pipe';
 import {
   FilterOption,
   SearchItemModel,
-  SettingsOption,
   SortOption,
+  SortOptionsStatus,
 } from '../../common/models';
 import SettingsService from '../../services/settings.service';
 import VideoService from '../../services/video.service';
@@ -19,24 +21,70 @@ export default class SearchResultComponent {
 
   public isSettingsActive: boolean = false;
 
-  public settingsOptions: (SettingsOption | SortOption | FilterOption)[] = [];
+  public areSortOptionsEnabled: Subject<SortOptionsStatus> = new Subject();
+
+  public sortOptionsStatus: SortOptionsStatus = {
+    isSortByDateEnabled: false,
+    isSortByViewCountEnabled: false,
+  };
 
   constructor(
     private settingsService: SettingsService,
     private videoService: VideoService,
-    private filterPipe: FilterByPipe
+    private filterPipe: FilterPipe,
+    private sortPipe: SortPipe
   ) {
     this.settingsService.isSettingsActive.subscribe(
       (status: boolean) => (this.isSettingsActive = status)
-    );
-    this.settingsService.settingsOptions.subscribe(
-      (options: (SettingsOption | SortOption | FilterOption)[]) =>
-        (this.settingsOptions = options)
     );
     this.videoService
       .search()
       .subscribe((result) => (this.searchResultList = result));
 
-    console.log(filterPipe);
+    this.settingsService.sortByDate.subscribe((option: SortOption) => {
+      this.sortOptionsStatus = {
+        ...this.sortOptionsStatus,
+        isSortByDateEnabled: option.enabled,
+      };
+      this.areSortOptionsEnabled.next(this.sortOptionsStatus);
+      if (option.enabled) {
+        this.searchResultList = this.sortPipe.transform(
+          this.searchResultList,
+          option.name,
+          option.sortDirection
+        );
+      }
+    });
+    this.settingsService.sortByViewCount.subscribe((option: SortOption) => {
+      this.sortOptionsStatus = {
+        ...this.sortOptionsStatus,
+        isSortByViewCountEnabled: option.enabled,
+      };
+      this.areSortOptionsEnabled.next(this.sortOptionsStatus);
+      if (option.enabled) {
+        this.searchResultList = this.sortPipe.transform(
+          this.searchResultList,
+          option.name,
+          option.sortDirection
+        );
+      }
+    });
+    this.settingsService.filterByTitle.subscribe((option: FilterOption) => {
+      this.searchResultList = this.filterPipe.transform(
+        this.searchResultList,
+        option.name,
+        option.value
+      );
+    });
+
+    this.areSortOptionsEnabled.subscribe((optionsStatus: SortOptionsStatus) => {
+      if (
+        Object.values(optionsStatus).every(
+          (optionStatus) => optionStatus === false
+        )
+      ) {
+        this.searchResultList = this.videoService.mockResponse.items;
+      }
+    });
   }
 }
