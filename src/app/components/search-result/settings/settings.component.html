@@ -6,6 +6,7 @@
     </mat-checkbox>
     <ng-container *ngIf="sortByDateOption.enabled">
       <app-sort-direction
+        [sortDirection]="sortByDateOption.sortDirection"
         (changeOderDirection)="changeDateSortDirection($event)"
       ></app-sort-direction>
     </ng-container>
@@ -17,6 +18,7 @@
     </mat-checkbox>
     <ng-container *ngIf="sortByViewCountOption.enabled">
       <app-sort-direction
+        [sortDirection]="sortByViewCountOption.sortDirection"
         (changeOderDirection)="changeViewCountSortDirection($event)"
       ></app-sort-direction>
     </ng-container>

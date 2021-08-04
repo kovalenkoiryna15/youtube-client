@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { SortDirections, SortOptions } from 'src/app/common/constants/settings';
+import { SortDirections } from 'src/app/common/constants/settings';
 import { SortOption } from 'src/app/common/models';
 import SettingsService from 'src/app/services/settings.service';
 
@@ -10,27 +10,24 @@ import SettingsService from 'src/app/services/settings.service';
   styleUrls: ['./settings.component.scss'],
 })
 export default class SettingsComponent {
-  public sortOptions: FormGroup = this.fb.group({
-    dateControl: false,
-    viewCountControl: false,
-  });
+  public sortOptions: FormGroup;
 
-  public sortByDateOption: SortOption = {
-    name: SortOptions.ByDate,
-    sortDirection: SortDirections.Decrease,
-    enabled: false,
-  };
+  public sortByDateOption: SortOption;
 
-  public sortByViewCountOption: SortOption = {
-    name: SortOptions.ByViewCount,
-    sortDirection: SortDirections.Decrease,
-    enabled: false,
-  };
+  public sortByViewCountOption: SortOption;
 
   constructor(
     private fb: FormBuilder,
     private settingsService: SettingsService
   ) {
+    this.sortByDateOption = this.settingsService.sortByDateOption;
+    this.sortByViewCountOption = this.settingsService.sortByViewCountOption;
+
+    this.sortOptions = this.fb.group({
+      dateControl: this.sortByDateOption.enabled,
+      viewCountControl: this.sortByViewCountOption.enabled,
+    });
+
     this.sortOptions.controls.dateControl.valueChanges.subscribe(
       (value: boolean) => {
         if (
@@ -39,6 +36,7 @@ export default class SettingsComponent {
           !this.sortByViewCountOption.enabled
         ) {
           this.sortByDateOption.enabled = true;
+          this.settingsService.sortByDateOption.enabled = true;
           this.settingsService.sortByDate.next(this.sortByDateOption);
         } else if (
           value &&
@@ -47,10 +45,13 @@ export default class SettingsComponent {
         ) {
           this.sortByDateOption.enabled = true;
           this.sortByViewCountOption.enabled = false;
+          this.settingsService.sortByDateOption.enabled = true;
+          this.settingsService.sortByViewCountOption.enabled = false;
           this.settingsService.sortByDate.next(this.sortByDateOption);
           this.sortOptions.controls.viewCountControl.setValue(false);
         } else {
           this.sortByDateOption.enabled = false;
+          this.settingsService.sortByDateOption.enabled = false;
           this.settingsService.sortByDate.next(this.sortByDateOption);
         }
       }
@@ -63,6 +64,7 @@ export default class SettingsComponent {
           !this.sortByViewCountOption.enabled
         ) {
           this.sortByViewCountOption.enabled = true;
+          this.settingsService.sortByViewCountOption.enabled = true;
           this.settingsService.sortByViewCount.next(this.sortByViewCountOption);
         } else if (
           value &&
@@ -71,10 +73,13 @@ export default class SettingsComponent {
         ) {
           this.sortByDateOption.enabled = false;
           this.sortByViewCountOption.enabled = true;
+          this.settingsService.sortByDateOption.enabled = false;
+          this.settingsService.sortByViewCountOption.enabled = true;
           this.settingsService.sortByViewCount.next(this.sortByViewCountOption);
           this.sortOptions.controls.dateControl.setValue(false);
         } else {
           this.sortByViewCountOption.enabled = false;
+          this.settingsService.sortByViewCountOption.enabled = false;
           this.settingsService.sortByViewCount.next(this.sortByViewCountOption);
         }
       }
@@ -85,6 +90,7 @@ export default class SettingsComponent {
     value: SortDirections.Increase | SortDirections.Decrease
   ) {
     this.sortByViewCountOption.sortDirection = value;
+    this.settingsService.sortByViewCountOption.sortDirection = value;
     this.settingsService.sortByViewCount.next(this.sortByViewCountOption);
   }
 
@@ -92,6 +98,7 @@ export default class SettingsComponent {
     value: SortDirections.Increase | SortDirections.Decrease
   ) {
     this.sortByDateOption.sortDirection = value;
+    this.settingsService.sortByDateOption.sortDirection = value;
     this.settingsService.sortByDate.next(this.sortByDateOption);
   }
 }
