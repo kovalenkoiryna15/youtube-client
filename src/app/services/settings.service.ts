@@ -5,7 +5,11 @@ import {
   SortDirections,
   SortOptions,
 } from '../common/constants/settings';
-import { FilterOption, SortOption } from '../common/models';
+import {
+  FilterOption,
+  SettingsOptionsState,
+  SortOption,
+} from '../common/models';
 
 @Injectable()
 export default class SettingsService {
@@ -17,21 +21,34 @@ export default class SettingsService {
 
   public filterByTitle: Subject<FilterOption> = new Subject();
 
-  public sortByDateOption: SortOption = {
+  static sortByDateOption: SortOption = {
     name: SortOptions.ByDate,
     sortDirection: SortDirections.Decrease,
     enabled: false,
   };
 
-  public sortByViewCountOption: SortOption = {
+  static sortByViewCountOption: SortOption = {
     name: SortOptions.ByViewCount,
     sortDirection: SortDirections.Decrease,
     enabled: false,
   };
 
-  public filterOption: FilterOption = {
+  static filterByTitleOption: FilterOption = {
     name: FilterOptions.ByTitle,
     value: [],
     enabled: false,
+  };
+
+  static filterByTagsOption: FilterOption = {
+    name: FilterOptions.ByTags,
+    value: [],
+    enabled: false,
+  };
+
+  public optionsState: SettingsOptionsState = {
+    [SortOptions.ByDate]: SettingsService.sortByDateOption,
+    [SortOptions.ByViewCount]: SettingsService.sortByViewCountOption,
+    [FilterOptions.ByTitle]: SettingsService.filterByTitleOption,
+    [FilterOptions.ByTags]: SettingsService.filterByTagsOption,
   };
 }

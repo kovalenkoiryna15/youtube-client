@@ -5,7 +5,11 @@ import {
 } from '../constants/settings';
 
 export interface SettingsOption {
-  name: string;
+  name:
+    | SortOptions.ByDate
+    | SortOptions.ByViewCount
+    | FilterOptions.ByTags
+    | FilterOptions.ByTitle;
   enabled: boolean;
 }
 
@@ -24,4 +28,16 @@ export interface SettingsOptionsStatus {
   [SortOptions.ByViewCount]: boolean;
   [FilterOptions.ByTitle]: boolean;
   [FilterOptions.ByTags]: boolean;
+}
+
+export interface SettingsOptionsState {
+  [SortOptions.ByDate]: SortOption;
+  [SortOptions.ByViewCount]: SortOption;
+  [FilterOptions.ByTitle]: FilterOption;
+  [FilterOptions.ByTags]: FilterOption;
+}
+
+export interface SortOptionsState {
+  [SortOptions.ByDate]: SortOption;
+  [SortOptions.ByViewCount]: SortOption;
 }

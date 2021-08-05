@@ -30,11 +30,14 @@ export default class SearchResultComponent {
     private filterPipe: FilterPipe
   ) {
     this.settingsOptionsStatus = {
-      [SortOptions.ByDate]: this.settingsService.sortByDateOption.enabled,
+      [SortOptions.ByDate]:
+        this.settingsService.optionsState[SortOptions.ByDate].enabled,
       [SortOptions.ByViewCount]:
-        this.settingsService.sortByViewCountOption.enabled,
-      [FilterOptions.ByTitle]: this.settingsService.filterOption.enabled,
-      [FilterOptions.ByTags]: false,
+        this.settingsService.optionsState[SortOptions.ByViewCount].enabled,
+      [FilterOptions.ByTitle]:
+        this.settingsService.optionsState[FilterOptions.ByTitle].enabled,
+      [FilterOptions.ByTags]:
+        this.settingsService.optionsState[FilterOptions.ByTags].enabled,
     };
 
     this.settingsService.isSettingsActive.subscribe(
@@ -64,16 +67,16 @@ export default class SearchResultComponent {
       );
 
       if (this.isSomeSortOptionEnabled()) {
-        if (this.settingsOptionsStatus.date) {
+        if (this.settingsOptionsStatus[SortOptions.ByDate]) {
           this.searchResultList = this.sortPipe.transform(
             this.searchResultList,
-            this.settingsService.sortByDateOption
+            this.settingsService.optionsState[SortOptions.ByDate]
           );
         }
-        if (this.settingsOptionsStatus.viewCount) {
+        if (this.settingsOptionsStatus[SortOptions.ByViewCount]) {
           this.searchResultList = this.sortPipe.transform(
             this.searchResultList,
-            this.settingsService.sortByViewCountOption
+            this.settingsService.optionsState[SortOptions.ByViewCount]
           );
         }
       }
@@ -86,7 +89,7 @@ export default class SearchResultComponent {
         ...this.settingsOptionsStatus,
         [option.name]: option.enabled,
       };
-      if (this.areAllSortOptionDisabled()) {
+      if (this.areAllSettingstOptionsDisabled()) {
         this.recoverSearchResultList();
       }
     }
@@ -107,7 +110,7 @@ export default class SearchResultComponent {
     );
   }
 
-  areAllSortOptionDisabled(): boolean {
+  areAllSettingstOptionsDisabled(): boolean {
     return Object.values(this.settingsOptionsStatus).every(
       (optionStatus) => optionStatus === false
     );

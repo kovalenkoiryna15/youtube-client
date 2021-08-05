@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { SortDirections } from 'src/app/common/constants/settings';
-import { SortOption } from 'src/app/common/models';
+import { SortDirections, SortOptions } from 'src/app/common/constants/settings';
+import { SortOption, SortOptionsState } from 'src/app/common/models';
 import SettingsService from 'src/app/services/settings.service';
 
 @Component({
@@ -10,77 +10,49 @@ import SettingsService from 'src/app/services/settings.service';
   styleUrls: ['./settings.component.scss'],
 })
 export default class SettingsComponent {
-  public sortOptions: FormGroup;
+  public sortOptionsState: SortOptionsState = {
+    [SortOptions.ByDate]: this.settingsService.optionsState[SortOptions.ByDate],
+    [SortOptions.ByViewCount]:
+      this.settingsService.optionsState[SortOptions.ByViewCount],
+  };
 
-  public sortByDateOption: SortOption;
-
-  public sortByViewCountOption: SortOption;
+  public sortOptions: FormGroup = this.fb.group({
+    [SortOptions.ByDate]: this.sortOptionsState[SortOptions.ByDate].enabled,
+    [SortOptions.ByViewCount]:
+      this.sortOptionsState[SortOptions.ByViewCount].enabled,
+  });
 
   constructor(
     private fb: FormBuilder,
     private settingsService: SettingsService
   ) {
-    this.sortByDateOption = this.settingsService.sortByDateOption;
-    this.sortByViewCountOption = this.settingsService.sortByViewCountOption;
-
-    this.sortOptions = this.fb.group({
-      dateControl: this.sortByDateOption.enabled,
-      viewCountControl: this.sortByViewCountOption.enabled,
-    });
-
-    this.sortOptions.controls.dateControl.valueChanges.subscribe(
+    this.sortOptions.controls[SortOptions.ByDate].valueChanges.subscribe(
       (value: boolean) => {
-        if (
-          value &&
-          !this.sortByDateOption.enabled &&
-          !this.sortByViewCountOption.enabled
-        ) {
-          this.sortByDateOption.enabled = true;
-          this.settingsService.sortByDateOption.enabled = true;
-          this.settingsService.sortByDate.next(this.sortByDateOption);
-        } else if (
-          value &&
-          !this.sortByDateOption.enabled &&
-          this.sortByViewCountOption.enabled
-        ) {
-          this.sortByDateOption.enabled = true;
-          this.sortByViewCountOption.enabled = false;
-          this.settingsService.sortByDateOption.enabled = true;
-          this.settingsService.sortByViewCountOption.enabled = false;
-          this.settingsService.sortByDate.next(this.sortByDateOption);
-          this.sortOptions.controls.viewCountControl.setValue(false);
+        if (value) {
+          this.switchEnabledOption(SortOptions.ByDate);
+          this.settingsService.sortByDate.next(
+            this.sortOptionsState[SortOptions.ByDate]
+          );
         } else {
-          this.sortByDateOption.enabled = false;
-          this.settingsService.sortByDateOption.enabled = false;
-          this.settingsService.sortByDate.next(this.sortByDateOption);
+          this.sortOptionsState[SortOptions.ByDate].enabled = false;
+          this.settingsService.sortByDate.next(
+            this.sortOptionsState[SortOptions.ByDate]
+          );
         }
       }
     );
-    this.sortOptions.controls.viewCountControl.valueChanges.subscribe(
+    this.sortOptions.controls[SortOptions.ByViewCount].valueChanges.subscribe(
       (value: boolean) => {
-        if (
-          value &&
-          !this.sortByDateOption.enabled &&
-          !this.sortByViewCountOption.enabled
-        ) {
-          this.sortByViewCountOption.enabled = true;
-          this.settingsService.sortByViewCountOption.enabled = true;
-          this.settingsService.sortByViewCount.next(this.sortByViewCountOption);
-        } else if (
-          value &&
-          this.sortByDateOption.enabled &&
-          !this.sortByViewCountOption.enabled
-        ) {
-          this.sortByDateOption.enabled = false;
-          this.sortByViewCountOption.enabled = true;
-          this.settingsService.sortByDateOption.enabled = false;
-          this.settingsService.sortByViewCountOption.enabled = true;
-          this.settingsService.sortByViewCount.next(this.sortByViewCountOption);
-          this.sortOptions.controls.dateControl.setValue(false);
+        if (value) {
+          this.switchEnabledOption(SortOptions.ByViewCount);
+          this.settingsService.sortByViewCount.next(
+            this.sortOptionsState[SortOptions.ByViewCount]
+          );
         } else {
-          this.sortByViewCountOption.enabled = false;
-          this.settingsService.sortByViewCountOption.enabled = false;
-          this.settingsService.sortByViewCount.next(this.sortByViewCountOption);
+          this.sortOptionsState[SortOptions.ByViewCount].enabled = false;
+          this.settingsService.sortByViewCount.next(
+            this.sortOptionsState[SortOptions.ByViewCount]
+          );
         }
       }
     );
@@ -89,16 +61,47 @@ export default class SettingsComponent {
   changeViewCountSortDirection(
     value: SortDirections.Increase | SortDirections.Decrease
   ) {
-    this.sortByViewCountOption.sortDirection = value;
-    this.settingsService.sortByViewCountOption.sortDirection = value;
-    this.settingsService.sortByViewCount.next(this.sortByViewCountOption);
+    this.sortOptionsState[SortOptions.ByViewCount].sortDirection = value;
+    this.settingsService.sortByViewCount.next(
+      this.sortOptionsState[SortOptions.ByViewCount]
+    );
   }
 
   changeDateSortDirection(
     value: SortDirections.Increase | SortDirections.Decrease
   ) {
-    this.sortByDateOption.sortDirection = value;
-    this.settingsService.sortByDateOption.sortDirection = value;
-    this.settingsService.sortByDate.next(this.sortByDateOption);
+    this.sortOptionsState[SortOptions.ByDate].sortDirection = value;
+    this.settingsService.sortByViewCount.next(
+      this.sortOptionsState[SortOptions.ByDate]
+    );
+  }
+
+  isSomeOtherSortOptionEnabled(
+    name: SortOptions.ByDate | SortOptions.ByViewCount
+  ): SortOption | null {
+    const enabled = Object.entries(this.sortOptionsState).find(
+      (option) =>
+        (option[1] as SortOption).enabled === true &&
+        (option[1] as SortOption).name !== name
+    );
+    if (enabled) {
+      return enabled[1];
+    }
+    return null;
+  }
+
+  switchEnabledOption(
+    name: SortOptions.ByDate | SortOptions.ByViewCount
+  ): void {
+    this.disableSomeEnabled(name);
+    this.sortOptionsState[name].enabled = true;
+  }
+
+  disableSomeEnabled(name: SortOptions.ByDate | SortOptions.ByViewCount) {
+    const option = this.isSomeOtherSortOptionEnabled(name);
+    if (option) {
+      this.sortOptionsState[option.name].enabled = false;
+      this.sortOptions.controls[option.name].setValue(false);
+    }
   }
 }

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { SPACE } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { FilterOptions } from 'src/app/common/constants/settings';
+import { FilterOption } from 'src/app/common/models';
 import SettingsService from '../../../../services/settings.service';
 
 @Component({
@@ -20,20 +22,23 @@ export default class FilterByTagsComponent {
 
   public chipControl = new FormControl();
 
-  constructor(private settingsService: SettingsService) {}
+  public filterByTitleOption: FilterOption;
+
+  constructor(private settingsService: SettingsService) {
+    this.filterByTitleOption =
+      this.settingsService.optionsState[FilterOptions.ByTitle];
+  }
 
   remove(fruit: string): void {
     const index = this.chips.indexOf(fruit);
 
     if (index >= 0) {
       this.chips.splice(index, 1);
-      this.settingsService.filterOption.value = this.chips;
-      if (this.settingsService.filterOption.enabled && this.chips.length < 1) {
-        this.settingsService.filterOption.enabled = false;
+      this.filterByTitleOption.value = this.chips;
+      if (this.filterByTitleOption.enabled && this.chips.length < 1) {
+        this.filterByTitleOption.enabled = false;
       }
-      this.settingsService.filterByTitle.next(
-        this.settingsService.filterOption
-      );
+      this.settingsService.filterByTitle.next(this.filterByTitleOption);
     }
   }
 
@@ -42,13 +47,11 @@ export default class FilterByTagsComponent {
 
     if (value) {
       this.chips.push(value);
-      this.settingsService.filterOption.value = this.chips;
-      if (!this.settingsService.filterOption.enabled) {
-        this.settingsService.filterOption.enabled = true;
+      this.filterByTitleOption.value = this.chips;
+      if (!this.filterByTitleOption.enabled) {
+        this.filterByTitleOption.enabled = true;
       }
-      this.settingsService.filterByTitle.next(
-        this.settingsService.filterOption
-      );
+      this.settingsService.filterByTitle.next(this.filterByTitleOption);
     }
 
     event.chipInput!.clear();
