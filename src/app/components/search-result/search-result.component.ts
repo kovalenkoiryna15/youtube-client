@@ -31,8 +31,8 @@ export default class SearchResultComponent {
   constructor(
     private settingsService: SettingsService,
     private videoService: VideoService,
-    private filterPipe: FilterPipe,
-    private sortPipe: SortPipe
+    private sortPipe: SortPipe,
+    private filterPipe: FilterPipe
   ) {
     this.settingsService.isSettingsActive.subscribe(
       (status: boolean) => (this.isSettingsActive = status)
@@ -69,11 +69,11 @@ export default class SearchResultComponent {
         );
       }
     });
+
     this.settingsService.filterByTitle.subscribe((option: FilterOption) => {
       this.searchResultList = this.filterPipe.transform(
-        this.searchResultList,
-        option.name,
-        option.value
+        this.videoService.mockResponse.items,
+        option
       );
     });
 

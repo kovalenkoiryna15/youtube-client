@@ -1,3 +1,4 @@
+<label>Filter by word or sentance:</label>
 <mat-form-field class="chip-input">
   <mat-chip-list #chipList>
     <mat-chip
@@ -11,7 +12,7 @@
     </mat-chip>
     <input
       [formControl]="chipControl"
-      placeholder="by word or sentance..."
+      placeholder="Tipe and press Space"
       autocomplete="off"
       [matChipInputFor]="chipList"
       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"

@@ -1,11 +1,11 @@
-<ng-container *ngIf="searchResultList.length > 0">
-  <div class="search-result__container">
-    <ng-container *ngIf="isSettingsActive">
-      <div class="settings__container">
-        <app-settings></app-settings>
-      </div>
-    </ng-container>
+<ng-container *ngIf="isSettingsActive">
+  <div class="settings__container">
+    <app-settings></app-settings>
+  </div>
+</ng-container>
 
+<ng-container *ngIf="searchResultList.length > 0; else noResults">
+  <div class="search-result__container">
     <div class="search-result__content">
       <app-search-item
         *ngFor="let searchItem of searchResultList"
@@ -14,3 +14,9 @@
     </div>
   </div>
 </ng-container>
+
+<ng-template #noResults>
+  <div class="search-result__container">
+    <p>No Results...</p>
+  </div>
+</ng-template>

@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { FilterOptions } from '../common/constants/settings';
+import { FilterOption } from '../common/models';
 import { SearchItemModel } from '../common/models/search-item-model';
 
 @Pipe({
@@ -8,17 +9,14 @@ import { SearchItemModel } from '../common/models/search-item-model';
 export default class FilterPipe implements PipeTransform {
   public transformed: SearchItemModel[] = [];
 
-  transform(
-    items: SearchItemModel[],
-    optionName: string,
-    values: string[]
-  ): SearchItemModel[] {
+  transform(items: SearchItemModel[], option: FilterOption): SearchItemModel[] {
     this.transformed = [...items];
+    console.log(option.value);
 
-    if (optionName === FilterOptions.ByTitle && values?.length > 0) {
-      this.filterByTitle(values);
+    if (option.name === FilterOptions.ByTitle && option.value.length > 0) {
+      this.filterByTitle(option.value);
     }
-
+    console.log(this.transformed);
     return this.transformed;
   }
 
