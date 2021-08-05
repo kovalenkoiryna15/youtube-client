@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { VideoListResponse } from '../common/interfaces';
-import MOCK_RESPONSE from '../common/mocks/response.json';
-import { SearchItemModel } from '../common/models';
+import { VideoListResponse } from 'src/app/shared/interfaces';
+import MOCK_RESPONSE from 'src/app/shared/mocks/response.json';
+import { SearchItemModel } from 'src/app/shared/models';
 
 @Injectable()
 export default class VideoService {

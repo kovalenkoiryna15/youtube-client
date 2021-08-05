@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { SortDirections, SortOptions } from 'src/app/common/constants/settings';
-import { SortOption, SortOptionsState } from 'src/app/common/models';
-import SettingsService from 'src/app/services/settings.service';
+import { SortDirections, SortOptions } from 'src/app/shared/constants/settings';
+import { SortOption, SortOptionsState } from 'src/app/shared/models';
+import SettingsService from 'src/app/shared/services/settings.service';
 
 @Component({
   selector: 'app-settings',

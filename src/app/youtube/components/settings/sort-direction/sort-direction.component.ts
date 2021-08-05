@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
-import { SortDirections } from 'src/app/common/constants/settings';
+import { SortDirections } from 'src/app/shared/constants/settings';
 
 @Component({
   selector: 'app-sort-direction',

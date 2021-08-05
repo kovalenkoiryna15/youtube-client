@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { FilterOptions } from '../common/constants/settings';
-import { FilterOption } from '../common/models';
-import { SearchItemModel } from '../common/models/search-item-model';
+import { FilterOptions } from 'src/app/shared/constants/settings';
+import { FilterOption } from 'src/app/shared/models';
+import { SearchItemModel } from 'src/app/shared/models/search-item-model';
 
 @Pipe({
   name: 'filterBy',

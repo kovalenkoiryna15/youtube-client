@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
-import { FilterOptions, SortOptions } from 'src/app/common/constants/settings';
-import FilterPipe from 'src/app/pipes/filter.pipe';
-import SortPipe from 'src/app/pipes/sort.pipe';
+import { FilterOptions, SortOptions } from 'src/app/shared/constants/settings';
+import FilterPipe from 'src/app/youtube/pipes/filter.pipe';
+import SortPipe from 'src/app/youtube/pipes/sort.pipe';
 import {
   FilterOption,
   SearchItemModel,
   SortOption,
   SettingsOptionsStatus,
-} from '../../common/models';
-import SettingsService from '../../services/settings.service';
-import VideoService from '../../services/video.service';
+} from 'src/app/shared/models';
+import SettingsService from 'src/app/shared/services/settings.service';
+import VideoService from 'src/app/youtube/services/video.service';
 
 @Component({
   selector: 'app-search-result',

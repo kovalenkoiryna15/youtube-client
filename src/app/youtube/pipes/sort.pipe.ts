@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { SortDirections, SortOptions } from '../common/constants/settings';
-import { SearchItemModel, SortOption } from '../common/models';
+import { SortDirections, SortOptions } from 'src/app/shared/constants/settings';
+import { SearchItemModel, SortOption } from 'src/app/shared/models';
 
 @Pipe({
   name: 'sortBy',

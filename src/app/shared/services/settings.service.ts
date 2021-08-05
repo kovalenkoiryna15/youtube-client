@@ -4,12 +4,12 @@ import {
   FilterOptions,
   SortDirections,
   SortOptions,
-} from '../common/constants/settings';
+} from 'src/app/shared/constants/settings';
 import {
   FilterOption,
   SettingsOptionsState,
   SortOption,
-} from '../common/models';
+} from 'src/app/shared/models';
 
 @Injectable()
 export default class SettingsService {
