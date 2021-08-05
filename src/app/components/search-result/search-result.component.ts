@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { Subject } from 'rxjs';
+import { FilterOptions, SortOptions } from 'src/app/common/constants/settings';
 import FilterPipe from 'src/app/pipes/filter.pipe';
 import SortPipe from 'src/app/pipes/sort.pipe';
 import {
   FilterOption,
   SearchItemModel,
   SortOption,
-  SortOptionsStatus,
+  SettingsOptionsStatus,
 } from '../../common/models';
 import SettingsService from '../../services/settings.service';
 import VideoService from '../../services/video.service';
@@ -21,12 +21,7 @@ export default class SearchResultComponent {
 
   public isSettingsActive: boolean = false;
 
-  public areSortOptionsEnabled: Subject<SortOptionsStatus> = new Subject();
-
-  public sortOptionsStatus: SortOptionsStatus = {
-    isSortByDateEnabled: false,
-    isSortByViewCountEnabled: false,
-  };
+  public settingsOptionsStatus: SettingsOptionsStatus;
 
   constructor(
     private settingsService: SettingsService,
@@ -34,82 +29,91 @@ export default class SearchResultComponent {
     private sortPipe: SortPipe,
     private filterPipe: FilterPipe
   ) {
+    this.settingsOptionsStatus = {
+      [SortOptions.ByDate]: this.settingsService.sortByDateOption.enabled,
+      [SortOptions.ByViewCount]:
+        this.settingsService.sortByViewCountOption.enabled,
+      [FilterOptions.ByTitle]: this.settingsService.filterOption.enabled,
+      [FilterOptions.ByTags]: false,
+    };
+
     this.settingsService.isSettingsActive.subscribe(
       (status: boolean) => (this.isSettingsActive = status)
     );
+
     this.videoService
       .search()
       .subscribe((result) => (this.searchResultList = result));
 
     this.settingsService.sortByDate.subscribe((option: SortOption) => {
-      this.sortOptionsStatus = {
-        ...this.sortOptionsStatus,
-        isSortByDateEnabled: option.enabled,
-      };
-      this.areSortOptionsEnabled.next(this.sortOptionsStatus);
-      if (option.enabled) {
-        this.searchResultList = this.sortPipe.transform(
-          this.searchResultList,
-          option.name,
-          option.sortDirection
-        );
-      }
+      this.updateOptionStatus(option);
+      this.transform(option);
     });
+
     this.settingsService.sortByViewCount.subscribe((option: SortOption) => {
-      this.sortOptionsStatus = {
-        ...this.sortOptionsStatus,
-        isSortByViewCountEnabled: option.enabled,
-      };
-      this.areSortOptionsEnabled.next(this.sortOptionsStatus);
-      if (option.enabled) {
-        this.searchResultList = this.sortPipe.transform(
-          this.searchResultList,
-          option.name,
-          option.sortDirection
-        );
-      }
+      this.updateOptionStatus(option);
+      this.transform(option);
     });
 
     this.settingsService.filterByTitle.subscribe((option: FilterOption) => {
-      if (
-        Object.values(this.sortOptionsStatus).some(
-          (optionStatus) => optionStatus === true
-        )
-      ) {
-        this.searchResultList = this.filterPipe.transform(
-          this.videoService.mockResponse.items,
-          option
-        );
-        if (this.sortOptionsStatus.isSortByDateEnabled) {
-          this.searchResultList = this.sortPipe.transform(
-            this.searchResultList,
-            this.settingsService.sortByDateOption.name,
-            this.settingsService.sortByDateOption.sortDirection
-          );
-        }
-        if (this.sortOptionsStatus.isSortByViewCountEnabled) {
-          this.searchResultList = this.sortPipe.transform(
-            this.searchResultList,
-            this.settingsService.sortByViewCountOption.name,
-            this.settingsService.sortByViewCountOption.sortDirection
-          );
-        }
-      } else {
-        this.searchResultList = this.filterPipe.transform(
-          this.videoService.mockResponse.items,
-          option
-        );
-      }
-    });
+      this.updateOptionStatus(option);
+      this.recoverSearchResultList();
+      this.searchResultList = this.filterPipe.transform(
+        this.searchResultList,
+        option
+      );
 
-    this.areSortOptionsEnabled.subscribe((optionsStatus: SortOptionsStatus) => {
-      if (
-        Object.values(optionsStatus).every(
-          (optionStatus) => optionStatus === false
-        )
-      ) {
-        this.searchResultList = this.videoService.mockResponse.items;
+      if (this.isSomeSortOptionEnabled()) {
+        if (this.settingsOptionsStatus.date) {
+          this.searchResultList = this.sortPipe.transform(
+            this.searchResultList,
+            this.settingsService.sortByDateOption
+          );
+        }
+        if (this.settingsOptionsStatus.viewCount) {
+          this.searchResultList = this.sortPipe.transform(
+            this.searchResultList,
+            this.settingsService.sortByViewCountOption
+          );
+        }
       }
     });
+  }
+
+  updateOptionStatus(option: SortOption | FilterOption): void {
+    if (this.settingsOptionsStatus[option.name] !== option.enabled) {
+      this.settingsOptionsStatus = {
+        ...this.settingsOptionsStatus,
+        [option.name]: option.enabled,
+      };
+      if (this.areAllSortOptionDisabled()) {
+        this.recoverSearchResultList();
+      }
+    }
+  }
+
+  transform(option: SortOption): void {
+    if (option.enabled) {
+      this.searchResultList = this.sortPipe.transform(
+        this.searchResultList,
+        option
+      );
+    }
+  }
+
+  isSomeSortOptionEnabled(): boolean {
+    return Object.values(this.settingsOptionsStatus).some(
+      (optionStatus) => optionStatus === true
+    );
+  }
+
+  areAllSortOptionDisabled(): boolean {
+    return Object.values(this.settingsOptionsStatus).every(
+      (optionStatus) => optionStatus === false
+    );
+  }
+
+  recoverSearchResultList(): void {
+    this.searchResultList = this.videoService.mockResponse.items;
   }
 }

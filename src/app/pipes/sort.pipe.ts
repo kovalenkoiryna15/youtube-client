@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { SortDirections, SortOptions } from '../common/constants/settings';
-import { SearchItemModel } from '../common/models';
+import { SearchItemModel, SortOption } from '../common/models';
 
 @Pipe({
   name: 'sortBy',
@@ -8,27 +8,28 @@ import { SearchItemModel } from '../common/models';
 export default class SortPipe implements PipeTransform {
   public transformed: SearchItemModel[] = [];
 
-  transform(
-    items: SearchItemModel[],
-    optionName: string,
-    direction: string
-  ): SearchItemModel[] {
+  transform(items: SearchItemModel[], option: SortOption): SearchItemModel[] {
+    const { name, sortDirection } = option;
     this.transformed = [...items];
 
-    if (optionName === SortOptions.ByDate) {
-      if (direction === SortDirections.Decrease) {
-        this.sortByNewFirst();
-      }
-      if (direction === SortDirections.Increase) {
-        this.sortByOldFirst();
-      }
+    if (name === SortOptions.ByDate) {
+      this.sortByDate(sortDirection);
     }
 
-    if (optionName === SortOptions.ByViewCount) {
-      this.sortByViewCount(direction);
+    if (name === SortOptions.ByViewCount) {
+      this.sortByViewCount(sortDirection);
     }
 
     return this.transformed;
+  }
+
+  sortByDate(sortDirection: string): void {
+    if (sortDirection === SortDirections.Decrease) {
+      this.sortByNewFirst();
+    }
+    if (sortDirection === SortDirections.Increase) {
+      this.sortByOldFirst();
+    }
   }
 
   sortByOldFirst(): void {
@@ -51,14 +52,14 @@ export default class SortPipe implements PipeTransform {
     });
   }
 
-  sortByViewCount(direction: string) {
-    if (direction === SortDirections.Decrease) {
+  sortByViewCount(sortDirection: string): void {
+    if (sortDirection === SortDirections.Decrease) {
       this.transformed.sort(
         (a, b) =>
           Number(b.statistics.viewCount) - Number(a.statistics.viewCount)
       );
     }
-    if (direction === SortDirections.Increase) {
+    if (sortDirection === SortDirections.Increase) {
       this.transformed.sort(
         (a, b) =>
           Number(a.statistics.viewCount) - Number(b.statistics.viewCount)
