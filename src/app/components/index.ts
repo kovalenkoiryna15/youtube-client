@@ -5,7 +5,7 @@ import SearchItemComponent from './search-result/search-item/search-item.compone
 import LoginComponent from './header/login/login.component';
 import LogoComponent from './header/logo/logo.component';
 import SettingsButtonComponent from './header/settings-button/settings-button.component';
-import FilterByTagsComponent from './search-result/settings/filter-by-tags/filter-by-tags.component';
+import FilterByTagsComponent from './search-result/settings/filter-by-chips/filter-by-chips.component';
 import SettingsComponent from './search-result/settings/settings.component';
 import SortDirectionComponent from './search-result/settings/sort-direction/sort-direction.component';
 

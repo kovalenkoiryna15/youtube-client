@@ -5,9 +5,9 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import SettingsService from '../../../../services/settings.service';
 
 @Component({
-  selector: 'app-filter-by-tags',
-  templateUrl: './filter-by-tags.component.html',
-  styleUrls: ['./filter-by-tags.component.scss'],
+  selector: 'app-filter-by-chips',
+  templateUrl: './filter-by-chips.component.html',
+  styleUrls: ['./filter-by-chips.component.scss'],
 })
 export default class FilterByTagsComponent {
   public separatorKeysCodes: number[] = [SPACE];

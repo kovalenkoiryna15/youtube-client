@@ -71,10 +71,35 @@ export default class SearchResultComponent {
     });
 
     this.settingsService.filterByTitle.subscribe((option: FilterOption) => {
-      this.searchResultList = this.filterPipe.transform(
-        this.videoService.mockResponse.items,
-        option
-      );
+      if (
+        Object.values(this.sortOptionsStatus).some(
+          (optionStatus) => optionStatus === true
+        )
+      ) {
+        this.searchResultList = this.filterPipe.transform(
+          this.videoService.mockResponse.items,
+          option
+        );
+        if (this.sortOptionsStatus.isSortByDateEnabled) {
+          this.searchResultList = this.sortPipe.transform(
+            this.searchResultList,
+            this.settingsService.sortByDateOption.name,
+            this.settingsService.sortByDateOption.sortDirection
+          );
+        }
+        if (this.sortOptionsStatus.isSortByViewCountEnabled) {
+          this.searchResultList = this.sortPipe.transform(
+            this.searchResultList,
+            this.settingsService.sortByViewCountOption.name,
+            this.settingsService.sortByViewCountOption.sortDirection
+          );
+        }
+      } else {
+        this.searchResultList = this.filterPipe.transform(
+          this.videoService.mockResponse.items,
+          option
+        );
+      }
     });
 
     this.areSortOptionsEnabled.subscribe((optionsStatus: SortOptionsStatus) => {
