@@ -11,19 +11,18 @@ export default class FilterPipe implements PipeTransform {
 
   transform(items: SearchItemModel[], option: FilterOption): SearchItemModel[] {
     this.transformed = [...items];
-    console.log(option.value);
 
     if (option.name === FilterOptions.ByTitle && option.value.length > 0) {
       this.filterByTitle(option.value);
     }
-    console.log(this.transformed);
+
     return this.transformed;
   }
 
   filterByTitle(words: string[]): void {
     words.forEach((word) => {
       this.transformed = this.transformed.filter((item: SearchItemModel) =>
-        item.snippet.title.includes(word)
+        item.snippet.title.match(new RegExp(word, 'i'))
       );
     });
   }
