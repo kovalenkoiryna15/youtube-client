@@ -1,0 +1,22 @@
+<label>Filter by word or sentance:</label>
+<mat-form-field class="chip-input">
+  <mat-chip-list #chipList>
+    <mat-chip
+      *ngFor="let chip of chips"
+      [selectable]="selectable"
+      [removable]="removable"
+      (removed)="remove(chip)"
+    >
+      {{ chip }}
+      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+    </mat-chip>
+    <input
+      [formControl]="chipControl"
+      placeholder="Tipe and press Space"
+      autocomplete="off"
+      [matChipInputFor]="chipList"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      (matChipInputTokenEnd)="add($event)"
+    />
+  </mat-chip-list>
+</mat-form-field>

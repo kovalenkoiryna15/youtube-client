@@ -1,0 +1,64 @@
+:host {
+  display: flex;
+  padding: 0 10px;
+  margin-bottom: 20px;
+}
+
+.search-item_recent {
+  border-bottom: 4px solid blue;
+}
+
+.search-item_less-than-month {
+  border-bottom: 4px solid green;
+}
+
+.search-item_long-ago {
+  border-bottom: 4px solid red;
+}
+
+.card .content__container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card .mat-card-header {
+  flex-grow: 2;
+}
+
+.card .mat-card-image {
+  height: auto;
+}
+
+.card .actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .action {
+    flex-basis: 70%;
+
+    .action__button {
+      width: 100%;
+    }
+  }
+}
+
+.card .statistics {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.card .statistics__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 10px 0;
+  border-radius: 8px;
+}
+
+.card .statistics__item span {
+  padding: 0 5px;
+}

@@ -1,0 +1,14 @@
+:host {
+  display: flex;
+  align-items: flex-end;
+}
+
+.checkbox {
+  padding: 0 10px;
+}
+
+.chip-input {
+  flex-basis: 40%;
+  min-width: fit-content;
+  padding: 0 15px;
+}

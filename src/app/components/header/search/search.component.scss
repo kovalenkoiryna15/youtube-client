@@ -4,22 +4,19 @@
 }
 
 .search-form {
-  flex-basis: 80%;
+  flex-basis: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
 }
 
 .search-form-field {
-  width: 100%;
-  padding: 0;
+  width: 80%;
+  margin: 0 15px;
 }
 
-.button {
-  cursor: pointer;
-}
-
-.button:hover,
-.button:focus,
-.button:active {
-  filter: brightness(85%);
+::ng-deep .mat-form-field-wrapper{
+  margin-bottom: -1.34375em;
 }
 
 .button_without-border {
@@ -28,4 +25,5 @@
 
 .button_circle {
   border-radius: 50%;
+  padding: 0;
 }

@@ -32,7 +32,10 @@
             "prefix": "app",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
+        "no-underscore-dangle": ["error", { "allowAfterThis": true }],
+        "no-return-assign": ["error", "except-parens"]
       }
     },
     {
