@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import SettingsService from 'src/app/core/services/settings.service';
+import { SettingsService } from 'src/app/core/services';
 
 @Component({
   selector: 'app-settings-button',
   templateUrl: './settings-button.component.html',
   styleUrls: ['./settings-button.component.scss'],
 })
-export default class SettingsButtonComponent {
+export class SettingsButtonComponent {
   public isSettingsActive: boolean = false;
 
   constructor(private settingsService: SettingsService) {}

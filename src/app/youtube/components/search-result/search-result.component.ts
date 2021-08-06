@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import SettingsService from 'src/app/core/services/settings.service';
-import VideoService from 'src/app/core/services/video.service';
+import { SettingsService, VideoService } from 'src/app/core/services';
 import {
   FilterOption,
   SearchItemModel,
@@ -8,15 +7,14 @@ import {
   SettingsOptionsStatus,
 } from 'src/app/shared/models';
 import { FilterOptions, SortOptions } from 'src/app/shared/constants/settings';
-import FilterPipe from '../../pipes/filter.pipe';
-import SortPipe from '../../pipes/sort.pipe';
+import { FilterPipe, SortPipe } from '../../pipes';
 
 @Component({
   selector: 'app-search-result',
   templateUrl: './search-result.component.html',
   styleUrls: ['./search-result.component.scss'],
 })
-export default class SearchResultComponent {
+export class SearchResultComponent {
   public searchResultList: SearchItemModel[] = [];
 
   public isSettingsActive: boolean = false;

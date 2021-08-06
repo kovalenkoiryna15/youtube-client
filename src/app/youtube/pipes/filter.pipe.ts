@@ -1,12 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { FilterOptions } from 'src/app/shared/constants/settings';
-import { FilterOption } from 'src/app/shared/models';
-import { SearchItemModel } from 'src/app/shared/models/search-item-model';
+import { FilterOption, SearchItemModel } from 'src/app/shared/models';
 
 @Pipe({
   name: 'filterBy',
 })
-export default class FilterPipe implements PipeTransform {
+export class FilterPipe implements PipeTransform {
   public transformed: SearchItemModel[] = [];
 
   transform(items: SearchItemModel[], option: FilterOption): SearchItemModel[] {

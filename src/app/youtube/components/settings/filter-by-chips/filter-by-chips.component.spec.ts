@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import FilterByTagsComponent from './filter-by-chips.component';
+import { FilterByTagsComponent } from './filter-by-chips.component';
 
 describe('FilterComponent', () => {
   let component: FilterByTagsComponent;

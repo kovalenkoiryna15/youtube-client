@@ -6,7 +6,7 @@ import { SortDirections } from 'src/app/shared/constants/settings';
   templateUrl: './sort-direction.component.html',
   styleUrls: ['./sort-direction.component.scss'],
 })
-export default class SortDirectionComponent implements OnInit {
+export class SortDirectionComponent implements OnInit {
   @Input() public sortDirection!: string;
 
   public isInIncresingOrder: boolean = false;

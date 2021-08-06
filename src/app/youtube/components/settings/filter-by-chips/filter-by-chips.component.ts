@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { SPACE } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
-import SettingsService from 'src/app/core/services/settings.service';
+import { SettingsService } from 'src/app/core/services';
 import { FilterOptions } from 'src/app/shared/constants/settings';
 import { FilterOption } from 'src/app/shared/models';
 
@@ -11,7 +11,7 @@ import { FilterOption } from 'src/app/shared/models';
   templateUrl: './filter-by-chips.component.html',
   styleUrls: ['./filter-by-chips.component.scss'],
 })
-export default class FilterByTagsComponent {
+export class FilterByTagsComponent {
   public separatorKeysCodes: number[] = [SPACE];
 
   public chips: string[] = [];

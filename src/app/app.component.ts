@@ -5,7 +5,7 @@ import { Component, HostBinding } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export default class AppComponent {
+export class AppComponent {
   public title: string = 'youtube-client';
 
   private isDarkTheme: boolean = true;

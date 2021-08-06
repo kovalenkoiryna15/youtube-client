@@ -5,4 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './detailed-info-page.component.html',
   styleUrls: ['./detailed-info-page.component.scss'],
 })
-export default class DetailedInfoPageComponent {}
+export class DetailedInfoPageComponent {}

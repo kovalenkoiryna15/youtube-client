@@ -5,7 +5,7 @@ import MOCK_RESPONSE from 'src/app/shared/mocks/response.json';
 import { SearchItemModel } from 'src/app/shared/models';
 
 @Injectable()
-export default class VideoService {
+export class VideoService {
   public mockResponse: VideoListResponse = MOCK_RESPONSE;
 
   public searchResult: Subject<SearchItemModel[]> = new Subject();

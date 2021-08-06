@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import VideoService from 'src/app/core/services/video.service';
+import { VideoService } from 'src/app/core/services';
 
 interface FormData {
   searchInput: string | null;
@@ -12,7 +12,7 @@ interface FormData {
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })
-export default class SearchComponent implements OnDestroy {
+export class SearchComponent implements OnDestroy {
   public formData?: FormData;
 
   public formValueSubscription: Subscription;

@@ -2,15 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import HeaderComponent from './components/header/header.component';
-import SearchComponent from './components/header/search/search.component';
-import LoginComponent from './components/header/login/login.component';
-import LogoComponent from './components/header/logo/logo.component';
-import SettingsButtonComponent from './components/header/settings-button/settings-button.component';
-import SettingsService from './services/settings.service';
-import VideoService from './services/video.service';
-
-import MaterialModule from '../material/material.module';
+import { MaterialModule } from '../material/material.module';
+import {
+  HeaderComponent,
+  SearchComponent,
+  LoginComponent,
+  LogoComponent,
+  SettingsButtonComponent,
+} from './components';
+import { SettingsService, VideoService } from './services';
 
 @NgModule({
   declarations: [
@@ -24,4 +24,4 @@ import MaterialModule from '../material/material.module';
   providers: [SettingsService, VideoService],
   exports: [HeaderComponent],
 })
-export default class CoreModule {}
+export class CoreModule {}

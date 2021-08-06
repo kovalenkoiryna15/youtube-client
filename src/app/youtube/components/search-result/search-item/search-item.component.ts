@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { SearchItemModel } from '../../../../shared/models/search-item-model';
+import { SearchItemModel } from '../../../../shared/models';
 
 @Component({
   selector: 'app-search-item',
@@ -7,6 +7,6 @@ import { SearchItemModel } from '../../../../shared/models/search-item-model';
   styleUrls: ['./search-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class SearchItemComponent {
+export class SearchItemComponent {
   @Input() public searchItem!: SearchItemModel;
 }

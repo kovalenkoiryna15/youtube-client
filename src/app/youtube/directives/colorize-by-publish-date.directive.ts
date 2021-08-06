@@ -1,10 +1,10 @@
 import { Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
-import Classes from '../shared/constants/colorize-by-publish-date';
+import { Classes } from '../shared/constants';
 
 @Directive({
   selector: '[appColorizeByPublishDate]',
 })
-export default class ColorizeByPublishDateDirective implements OnInit {
+export class ColorizeByPublishDateDirective implements OnInit {
   @Input('appColorizeByPublishDate') date?: string;
 
   public classes = Classes;

@@ -5,7 +5,7 @@ import { SearchItemModel, SortOption } from 'src/app/shared/models';
 @Pipe({
   name: 'sortBy',
 })
-export default class SortPipe implements PipeTransform {
+export class SortPipe implements PipeTransform {
   public transformed: SearchItemModel[] = [];
 
   transform(items: SearchItemModel[], option: SortOption): SearchItemModel[] {

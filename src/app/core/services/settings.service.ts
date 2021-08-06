@@ -12,7 +12,7 @@ import {
 } from 'src/app/shared/models';
 
 @Injectable()
-export default class SettingsService {
+export class SettingsService {
   public isSettingsActive: Subject<boolean> = new Subject();
 
   public sortByDate: Subject<SortOption> = new Subject();

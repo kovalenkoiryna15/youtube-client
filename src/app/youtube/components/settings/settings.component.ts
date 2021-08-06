@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import SettingsService from 'src/app/core/services/settings.service';
+import { SettingsService } from 'src/app/core/services';
 import { SortDirections, SortOptions } from 'src/app/shared/constants/settings';
 import { SortOption, SortOptionsState } from 'src/app/shared/models';
 
@@ -9,7 +9,7 @@ import { SortOption, SortOptionsState } from 'src/app/shared/models';
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
 })
-export default class SettingsComponent {
+export class SettingsComponent {
   public sortOptionsState: SortOptionsState = {
     [SortOptions.ByDate]: this.settingsService.optionsState[SortOptions.ByDate],
     [SortOptions.ByViewCount]:

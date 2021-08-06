@@ -1,4 +1,4 @@
-import ColorizeByPublishDateDirective from './colorize-by-publish-date.directive';
+import { ColorizeByPublishDateDirective } from './colorize-by-publish-date.directive';
 
 describe('ColorizeByPublishDateDirective', () => {
   it('should create an instance', () => {

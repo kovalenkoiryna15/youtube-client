@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import SortDirectionComponent from './sort-direction.component';
+import { SortDirectionComponent } from './sort-direction.component';
 
 describe('SortOptionComponent', () => {
   let component: SortDirectionComponent;

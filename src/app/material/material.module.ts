@@ -22,4 +22,4 @@ const modules = [
   exports: [...modules],
   providers: [],
 })
-export default class MaterialModule {}
+export class MaterialModule {}
