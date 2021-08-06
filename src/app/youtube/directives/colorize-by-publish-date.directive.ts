@@ -1,5 +1,5 @@
 import { Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
-import Classes from 'src/app/shared/constants/colorize-by-publish-date';
+import Classes from '../shared/constants/colorize-by-publish-date';
 
 @Directive({
   selector: '[appColorizeByPublishDate]',

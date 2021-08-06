@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { SPACE } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
+import SettingsService from 'src/app/core/services/settings.service';
 import { FilterOptions } from 'src/app/shared/constants/settings';
 import { FilterOption } from 'src/app/shared/models';
-import SettingsService from 'src/app/shared/services/settings.service';
 
 @Component({
   selector: 'app-filter-by-chips',

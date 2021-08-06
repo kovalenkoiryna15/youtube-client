@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import SettingsService from 'src/app/shared/services/settings.service';
+import SettingsService from 'src/app/core/services/settings.service';
 
 @Component({
   selector: 'app-settings-button',

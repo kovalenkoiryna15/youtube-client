@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import VideoService from 'src/app/youtube/services/video.service';
+import VideoService from 'src/app/core/services/video.service';
 
 interface FormData {
   searchInput: string | null;
