@@ -2,6 +2,10 @@
   display: flex;
   width: 100%;
   height: 80%;
+
+  ::ng-deep .mat-form-field-wrapper{
+    margin-bottom: -1.34375em;
+  }
 }
 
 .search-form {
@@ -14,10 +18,6 @@
 .search-form-field {
   width: 80%;
   margin: 0 15px;
-}
-
-::ng-deep .mat-form-field-wrapper{
-  margin-bottom: -1.34375em;
 }
 
 .button_without-border {
