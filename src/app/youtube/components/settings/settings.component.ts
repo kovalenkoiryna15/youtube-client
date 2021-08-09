@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { SettingsService } from 'src/app/core/services';
 import { SortDirections, SortOptions } from 'src/app/shared/constants/settings';
 import { SortOption, SortOptionsState } from 'src/app/shared/models';
@@ -9,7 +10,7 @@ import { SortOption, SortOptionsState } from 'src/app/shared/models';
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
 })
-export class SettingsComponent {
+export class SettingsComponent implements OnDestroy {
   public sortOptionsState: SortOptionsState = {
     [SortOptions.ByDate]: this.settingsService.optionsState[SortOptions.ByDate],
     [SortOptions.ByViewCount]:
@@ -22,40 +23,51 @@ export class SettingsComponent {
       this.sortOptionsState[SortOptions.ByViewCount].enabled,
   });
 
+  public subscriptions: Subscription = new Subscription();
+
   constructor(
     private fb: FormBuilder,
     private settingsService: SettingsService
   ) {
-    this.sortOptions.controls[SortOptions.ByDate].valueChanges.subscribe(
-      (value: boolean) => {
-        if (value) {
-          this.switchEnabledOption(SortOptions.ByDate);
-          this.settingsService.sortByDate.next(
-            this.sortOptionsState[SortOptions.ByDate]
-          );
-        } else {
-          this.sortOptionsState[SortOptions.ByDate].enabled = false;
-          this.settingsService.sortByDate.next(
-            this.sortOptionsState[SortOptions.ByDate]
-          );
+    this.subscriptions.add(
+      this.sortOptions.controls[SortOptions.ByDate].valueChanges.subscribe(
+        (value: boolean) => {
+          if (value) {
+            this.switchEnabledOption(SortOptions.ByDate);
+            this.settingsService.sortByDate.next(
+              this.sortOptionsState[SortOptions.ByDate]
+            );
+          } else {
+            this.sortOptionsState[SortOptions.ByDate].enabled = false;
+            this.settingsService.sortByDate.next(
+              this.sortOptionsState[SortOptions.ByDate]
+            );
+          }
         }
-      }
+      )
     );
-    this.sortOptions.controls[SortOptions.ByViewCount].valueChanges.subscribe(
-      (value: boolean) => {
-        if (value) {
-          this.switchEnabledOption(SortOptions.ByViewCount);
-          this.settingsService.sortByViewCount.next(
-            this.sortOptionsState[SortOptions.ByViewCount]
-          );
-        } else {
-          this.sortOptionsState[SortOptions.ByViewCount].enabled = false;
-          this.settingsService.sortByViewCount.next(
-            this.sortOptionsState[SortOptions.ByViewCount]
-          );
+
+    this.subscriptions.add(
+      this.sortOptions.controls[SortOptions.ByViewCount].valueChanges.subscribe(
+        (value: boolean) => {
+          if (value) {
+            this.switchEnabledOption(SortOptions.ByViewCount);
+            this.settingsService.sortByViewCount.next(
+              this.sortOptionsState[SortOptions.ByViewCount]
+            );
+          } else {
+            this.sortOptionsState[SortOptions.ByViewCount].enabled = false;
+            this.settingsService.sortByViewCount.next(
+              this.sortOptionsState[SortOptions.ByViewCount]
+            );
+          }
         }
-      }
+      )
     );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   changeViewCountSortDirection(

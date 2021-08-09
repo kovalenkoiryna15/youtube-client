@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { SettingsService, VideoService } from 'src/app/core/services';
 import {
   FilterOption,
@@ -7,6 +7,7 @@ import {
   SettingsOptionsStatus,
 } from 'src/app/shared/models';
 import { FilterOptions, SortOptions } from 'src/app/shared/constants/settings';
+import { Subscription } from 'rxjs';
 import { FilterPipe, SortPipe } from '../../pipes';
 
 @Component({
@@ -14,12 +15,14 @@ import { FilterPipe, SortPipe } from '../../pipes';
   templateUrl: './search-result.component.html',
   styleUrls: ['./search-result.component.scss'],
 })
-export class SearchResultComponent {
+export class SearchResultComponent implements OnDestroy {
   public searchResultList: SearchItemModel[] = [];
 
   public isSettingsActive: boolean = false;
 
   public settingsOptionsStatus: SettingsOptionsStatus;
+
+  public subscriptions: Subscription = new Subscription();
 
   constructor(
     private settingsService: SettingsService,
@@ -38,47 +41,61 @@ export class SearchResultComponent {
         this.settingsService.optionsState[FilterOptions.ByTags].enabled,
     };
 
-    this.settingsService.isSettingsActive.subscribe(
-      (status: boolean) => (this.isSettingsActive = status)
+    this.subscriptions.add(
+      this.settingsService.isSettingsActive.subscribe(
+        (status: boolean) => (this.isSettingsActive = status)
+      )
     );
 
-    this.videoService
-      .search()
-      .subscribe((result) => (this.searchResultList = result));
+    this.subscriptions.add(
+      this.videoService
+        .search()
+        .subscribe((result) => (this.searchResultList = result))
+    );
 
-    this.settingsService.sortByDate.subscribe((option: SortOption) => {
-      this.updateOptionStatus(option);
-      this.transform(option);
-    });
+    this.subscriptions.add(
+      this.settingsService.sortByDate.subscribe((option: SortOption) => {
+        this.updateOptionStatus(option);
+        this.transform(option);
+      })
+    );
 
-    this.settingsService.sortByViewCount.subscribe((option: SortOption) => {
-      this.updateOptionStatus(option);
-      this.transform(option);
-    });
+    this.subscriptions.add(
+      this.settingsService.sortByViewCount.subscribe((option: SortOption) => {
+        this.updateOptionStatus(option);
+        this.transform(option);
+      })
+    );
 
-    this.settingsService.filterByTitle.subscribe((option: FilterOption) => {
-      this.updateOptionStatus(option);
-      this.recoverSearchResultList();
-      this.searchResultList = this.filterPipe.transform(
-        this.searchResultList,
-        option
-      );
+    this.subscriptions.add(
+      this.settingsService.filterByTitle.subscribe((option: FilterOption) => {
+        this.updateOptionStatus(option);
+        this.recoverSearchResultList();
+        this.searchResultList = this.filterPipe.transform(
+          this.searchResultList,
+          option
+        );
 
-      if (this.isSomeSortOptionEnabled()) {
-        if (this.settingsOptionsStatus[SortOptions.ByDate]) {
-          this.searchResultList = this.sortPipe.transform(
-            this.searchResultList,
-            this.settingsService.optionsState[SortOptions.ByDate]
-          );
+        if (this.isSomeSortOptionEnabled()) {
+          if (this.settingsOptionsStatus[SortOptions.ByDate]) {
+            this.searchResultList = this.sortPipe.transform(
+              this.searchResultList,
+              this.settingsService.optionsState[SortOptions.ByDate]
+            );
+          }
+          if (this.settingsOptionsStatus[SortOptions.ByViewCount]) {
+            this.searchResultList = this.sortPipe.transform(
+              this.searchResultList,
+              this.settingsService.optionsState[SortOptions.ByViewCount]
+            );
+          }
         }
-        if (this.settingsOptionsStatus[SortOptions.ByViewCount]) {
-          this.searchResultList = this.sortPipe.transform(
-            this.searchResultList,
-            this.settingsService.optionsState[SortOptions.ByViewCount]
-          );
-        }
-      }
-    });
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   updateOptionStatus(option: SortOption | FilterOption): void {
