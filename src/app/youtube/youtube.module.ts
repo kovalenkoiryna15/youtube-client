@@ -14,6 +14,7 @@ import {
 import { ColorizeByPublishDateDirective } from './directives';
 import { SortPipe, FilterPipe } from './pipes';
 import { DetailedInfoPageComponent, MainPageComponent } from './pages';
+import { YouTubeRoutingModule } from './youtube-routing.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,13 @@ import { DetailedInfoPageComponent, MainPageComponent } from './pages';
     DetailedInfoPageComponent,
     MainPageComponent,
   ],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, MaterialModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MaterialModule,
+    YouTubeRoutingModule,
+  ],
   providers: [VideoService, FilterPipe, SortPipe],
   exports: [SettingsComponent, SearchResultComponent],
 })
