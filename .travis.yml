@@ -9,7 +9,7 @@ dist: focal
 
 branches:
   only:
-    - master
+    - youtube-client/routing
 
 cache:
   directories:
