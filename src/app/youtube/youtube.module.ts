@@ -15,6 +15,8 @@ import { SortPipe, FilterPipe } from './pipes';
 import { DetailedInfoPageComponent, MainPageComponent } from './pages';
 import { YouTubeRoutingModule } from './youtube-routing.module';
 import { DetailedInfoComponent } from './components/detailed-info/detailed-info.component';
+import { SharedModule } from '../shared/shared.module';
+import { YoutubeComponent } from './youtube.component';
 
 @NgModule({
   declarations: [
@@ -29,12 +31,14 @@ import { DetailedInfoComponent } from './components/detailed-info/detailed-info.
     DetailedInfoPageComponent,
     MainPageComponent,
     DetailedInfoComponent,
+    YoutubeComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
+    SharedModule,
     YouTubeRoutingModule,
   ],
   providers: [SortPipe, FilterPipe],

@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'auth', pathMatch: 'full' },
   {
     path: 'youtube',
     loadChildren: () =>
@@ -14,6 +13,7 @@ const routes: Routes = [
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
+  { path: '', redirectTo: '/auth', pathMatch: 'full' },
   {
     path: '**',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),

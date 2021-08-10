@@ -1,1 +1,7 @@
-<p>detailed-info works!</p>
+<ng-container *ngIf="videoData; else detailedInfoSpinner">
+  <p>{{ videoData.id }}</p>
+</ng-container>
+
+<ng-template #detailedInfoSpinner>
+  <app-spinner></app-spinner>
+</ng-template>
