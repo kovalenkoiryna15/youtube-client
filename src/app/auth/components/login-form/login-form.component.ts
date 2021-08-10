@@ -1,5 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -17,8 +23,22 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   };
 
   public loginFormGroup = this.fb.group({
-    username: [null, [Validators.required]],
-    password: [null, [Validators.required]],
+    username: [
+      null,
+      [
+        Validators.required,
+        LoginFormComponent.noWhitespaceValidator,
+        LoginFormComponent.usernameValidator,
+      ],
+    ],
+    password: [
+      null,
+      [
+        Validators.required,
+        LoginFormComponent.noWhitespaceValidator,
+        LoginFormComponent.passwordValidator,
+      ],
+    ],
   });
 
   public isLoading: boolean = true;
@@ -67,5 +87,21 @@ export class LoginFormComponent implements OnInit, OnDestroy {
     return Object.values(this.loginFormGroup.controls).every(
       (control: AbstractControl) => !!control.errors
     );
+  }
+
+  static noWhitespaceValidator(control: FormControl): ValidationErrors | null {
+    const isWhitespace = (control.value || '').trim().length === 0;
+    return !isWhitespace ? null : { whitespace: true };
+  }
+
+  static passwordValidator(control: FormControl): ValidationErrors | null {
+    const isSpace = (control.value || '').trim().includes(' ');
+    const isValid = (control.value || '').match(new RegExp('[A-Za-z0-9]{3,}'));
+    return !isSpace && isValid ? null : { password: true };
+  }
+
+  static usernameValidator(control: FormControl): ValidationErrors | null {
+    const isValid = (control.value || '').match(new RegExp('[A-Za-z]{3,}'));
+    return isValid ? null : { username: true };
   }
 }

@@ -1,19 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { User } from 'src/app/shared/interfaces';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy {
   public username: string = 'Your name';
 
+  public subscriptions: Subscription = new Subscription();
+
   constructor(private authService: AuthService) {
-    console.log(this.authService.userData);
-    if (this.authService.userData?.username) {
-      this.username = this.authService.userData?.username;
-      console.log(this.username);
-    }
+    this.subscriptions.add(
+      this.authService.user.subscribe(
+        (user: User) => (this.username = user.username)
+      )
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }

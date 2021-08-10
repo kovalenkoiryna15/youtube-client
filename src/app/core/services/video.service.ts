@@ -17,7 +17,6 @@ export class VideoService {
   constructor() {
     this.searchValue.subscribe((value) => {
       if (value) {
-        console.log(value);
         this.searchResult.next(this.mockResponse.items);
       } else {
         this.searchResult.next([]);

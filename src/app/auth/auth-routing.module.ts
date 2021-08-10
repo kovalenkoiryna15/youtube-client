@@ -1,15 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginPageComponent, NotFoundPageComponent } from './pages';
+import { LoginPageComponent } from './pages';
 
 const routes: Routes = [
   {
-    path: 'login',
+    path: '',
+    pathMatch: 'full',
     component: LoginPageComponent,
-  },
-  {
-    path: '**',
-    component: NotFoundPageComponent,
   },
 ];
 

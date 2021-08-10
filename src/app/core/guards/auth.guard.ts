@@ -10,7 +10,7 @@ export class AuthGuard implements CanLoad {
 
   canLoad(): boolean {
     if (!this.authService.isAuthorized()) {
-      this.router.navigate(['auth/login']);
+      this.router.navigate(['auth']);
     }
     return this.authService.isAuthorized();
   }
