@@ -1,3 +1,9 @@
-import { LoginFormData } from '../models/login-form-model';
+export interface User {
+  username: string;
+  userId: string;
+}
 
-export interface User extends LoginFormData {}
+export interface UserAuthenticationData {
+  token: string;
+  userId: string;
+}

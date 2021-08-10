@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -53,15 +53,19 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    if (
-      !this.loginFormGroup.controls.username.errors ||
-      !this.loginFormGroup.controls.password.errors
-    ) {
-      this.authService.login(this.formData);
+    const { password, username } = this.formData;
+    if (!this.doControlsHaveAnyErrors() && password && username) {
+      this.authService.register({ username, userId: '' });
       this.isLoading = true;
       setTimeout(() => {
         this.router.navigate(['youtube']);
       }, 2000);
     }
+  }
+
+  doControlsHaveAnyErrors(): boolean {
+    return Object.values(this.loginFormGroup.controls).every(
+      (control: AbstractControl) => !!control.errors
+    );
   }
 }

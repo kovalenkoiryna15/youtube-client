@@ -12,6 +12,7 @@ import {
 } from './components';
 import { SettingsService, VideoService } from './services';
 import { AuthService } from './services/auth.service';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ export class CoreModule {
   static forRoot(): ModuleWithProviders<CoreModule> {
     return {
       ngModule: CoreModule,
-      providers: [SettingsService, AuthService, VideoService],
+      providers: [SettingsService, AuthService, VideoService, AuthGuard],
     };
   }
 }
