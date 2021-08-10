@@ -18,5 +18,25 @@
 
 .card__content {
   flex-basis: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
+.statistics {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 10px 0 0 0;
+}
+
+.statistics__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+
+.statistics__item span {
+  padding: 0 5px;
 }

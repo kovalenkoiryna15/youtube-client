@@ -18,6 +18,24 @@
         <div><strong>Description:</strong></div>
         <div>{{ videoData.snippet.description }}</div>
       </div>
+      <section class="statistics">
+        <div class="statistics__item">
+          <mat-icon>visibility</mat-icon>
+          <span>{{ videoData.statistics.viewCount }}</span>
+        </div>
+        <div class="statistics__item">
+          <mat-icon>favorite</mat-icon>
+          <span>{{ videoData.statistics.likeCount }}</span>
+        </div>
+        <div class="statistics__item">
+          <mat-icon>thumb_down</mat-icon>
+          <span>{{ videoData.statistics.dislikeCount }}</span>
+        </div>
+        <div class="statistics__item">
+          <mat-icon>chat</mat-icon>
+          <span>{{ videoData.statistics.commentCount }}</span>
+        </div>
+      </section>
     </mat-card-content>
   </mat-card>
 </ng-container>
