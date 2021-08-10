@@ -1,5 +1,25 @@
 <ng-container *ngIf="videoData; else detailedInfoSpinner">
-  <p>{{ videoData.id }}</p>
+  <mat-card class="card">
+    <div class="card-image__wrapper">
+      <img
+        class="card-image"
+        [src]="videoData.snippet.thumbnails.maxres.url"
+        [alt]="videoData.snippet.title"
+      />
+    </div>
+    <mat-card-content class="card__content">
+      <mat-card-header>
+        <mat-card-title>{{ videoData.snippet.title }}</mat-card-title>
+        <mat-card-subtitle>{{
+          videoData.snippet.publishedAt | date: 'medium'
+        }}</mat-card-subtitle>
+      </mat-card-header>
+      <div class="card-description">
+        <div><strong>Description:</strong></div>
+        <div>{{ videoData.snippet.description }}</div>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </ng-container>
 
 <ng-template #detailedInfoSpinner>
