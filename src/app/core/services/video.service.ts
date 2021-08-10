@@ -4,7 +4,9 @@ import { VideoListResponse } from 'src/app/shared/interfaces';
 import MOCK_RESPONSE from 'src/app/shared/mocks/response.json';
 import { SearchItemModel } from 'src/app/shared/models';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class VideoService {
   public mockResponse: VideoListResponse = MOCK_RESPONSE;
 
@@ -15,6 +17,7 @@ export class VideoService {
   constructor() {
     this.searchValue.subscribe((value) => {
       if (value) {
+        console.log(value);
         this.searchResult.next(this.mockResponse.items);
       } else {
         this.searchResult.next([]);

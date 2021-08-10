@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -11,6 +11,7 @@ import {
   SettingsButtonComponent,
 } from './components';
 import { SettingsService, VideoService } from './services';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,13 @@ import { SettingsService, VideoService } from './services';
     SettingsButtonComponent,
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, MaterialModule],
-  providers: [SettingsService, VideoService],
   exports: [HeaderComponent],
 })
-export class CoreModule {}
+export class CoreModule {
+  static forRoot(): ModuleWithProviders<CoreModule> {
+    return {
+      ngModule: CoreModule,
+      providers: [SettingsService, AuthService, VideoService],
+    };
+  }
+}

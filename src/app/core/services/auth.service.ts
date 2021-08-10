@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { User } from '../shared/interfaces';
-import { LoginFormData } from '../shared/models';
+import { User } from '../../shared/interfaces';
+import { LoginFormData } from '../../shared/models';
 
 @Injectable({
   providedIn: 'root',

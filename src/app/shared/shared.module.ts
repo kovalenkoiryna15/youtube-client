@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SpinnerComponent } from './components/spinner/spinner.component';
+import { MaterialModule } from '../material/material.module';
 
 @NgModule({
-  declarations: [],
-  imports: [CommonModule],
+  declarations: [SpinnerComponent],
+  imports: [CommonModule, MaterialModule],
+  exports: [SpinnerComponent],
 })
-export default class SharedModule {}
+export class SharedModule {}

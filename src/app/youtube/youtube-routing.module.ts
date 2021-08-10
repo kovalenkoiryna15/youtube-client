@@ -4,7 +4,7 @@ import { DetailedInfoPageComponent, MainPageComponent } from './pages';
 
 const routes: Routes = [
   {
-    path: 'youtube',
+    path: '',
     component: MainPageComponent,
   },
   {

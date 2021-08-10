@@ -11,10 +11,9 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    CoreModule,
+    CoreModule.forRoot(),
     AppRoutingModule,
   ],
   bootstrap: [AppComponent],
-  providers: [],
 })
 export default class AppModule {}

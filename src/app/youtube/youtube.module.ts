@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialModule } from 'src/app/material/material.module';
-import { VideoService } from 'src/app/core/services';
 import {
   FilterByTagsComponent,
   SettingsComponent,
@@ -15,6 +14,7 @@ import { ColorizeByPublishDateDirective } from './directives';
 import { SortPipe, FilterPipe } from './pipes';
 import { DetailedInfoPageComponent, MainPageComponent } from './pages';
 import { YouTubeRoutingModule } from './youtube-routing.module';
+import { DetailedInfoComponent } from './components/detailed-info/detailed-info.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +28,7 @@ import { YouTubeRoutingModule } from './youtube-routing.module';
     ColorizeByPublishDateDirective,
     DetailedInfoPageComponent,
     MainPageComponent,
+    DetailedInfoComponent,
   ],
   imports: [
     CommonModule,
@@ -36,7 +37,7 @@ import { YouTubeRoutingModule } from './youtube-routing.module';
     MaterialModule,
     YouTubeRoutingModule,
   ],
-  providers: [VideoService, FilterPipe, SortPipe],
+  providers: [SortPipe, FilterPipe],
   exports: [SettingsComponent, SearchResultComponent],
 })
 export class YoutubeModule {}

@@ -37,7 +37,12 @@
     </mat-card-header>
     <div class="actions">
       <mat-card-actions class="action">
-        <button mat-button class="action__button" color="primary">
+        <button
+          mat-button
+          class="action__button"
+          color="primary"
+          (click)="onShowDetailedInfo()"
+        >
           More...
         </button>
       </mat-card-actions>

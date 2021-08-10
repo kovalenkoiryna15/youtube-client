@@ -7,6 +7,7 @@ import { NotFoundPageComponent, LoginPageComponent } from './pages';
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { AuthCardComponent } from './components/auth-card/auth-card.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { AuthCardComponent } from './components/auth-card/auth-card.component';
   ],
   imports: [
     CommonModule,
+    SharedModule,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,

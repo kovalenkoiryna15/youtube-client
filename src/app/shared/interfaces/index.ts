@@ -5,3 +5,4 @@ export * from './video-snippet';
 export * from './video-statistics';
 export * from './video-thumbnail';
 export * from './video-thumbnails';
+export * from './user';

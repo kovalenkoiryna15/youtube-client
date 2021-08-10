@@ -1,7 +1,10 @@
 :host {
   display: flex;
   align-items: flex-end;
-  height: 100%;
+
+  ::ng-deep .mat-form-field-wrapper{
+    margin-bottom: -1.34375em;
+  }
 }
 
 .sort-option__list {

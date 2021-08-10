@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AuthService } from '../../services';
-import { LoginFormData } from '../../shared/models';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { LoginFormData } from 'src/app/shared/models';
 
 @Component({
   selector: 'app-login-form',
@@ -38,8 +38,11 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.isLoading = true;
     if (this.authService.isAuthorized()) {
-      this.router.navigate(['youtube']);
+      setTimeout(() => {
+        this.router.navigate(['youtube']);
+      }, 2000);
     } else {
       this.isLoading = false;
     }
@@ -55,7 +58,10 @@ export class LoginFormComponent implements OnInit, OnDestroy {
       !this.loginFormGroup.controls.password.errors
     ) {
       this.authService.login(this.formData);
-      this.router.navigate(['youtube']);
+      this.isLoading = true;
+      setTimeout(() => {
+        this.router.navigate(['youtube']);
+      }, 2000);
     }
   }
 }

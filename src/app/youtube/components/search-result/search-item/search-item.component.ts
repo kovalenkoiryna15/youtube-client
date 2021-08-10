@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { SearchItemModel } from '../../../../shared/models';
 
 @Component({
@@ -9,4 +10,10 @@ import { SearchItemModel } from '../../../../shared/models';
 })
 export class SearchItemComponent {
   @Input() public searchItem!: SearchItemModel;
+
+  constructor(private router: Router) {}
+
+  onShowDetailedInfo() {
+    this.router.navigate([`/${this.searchItem.id}`]);
+  }
 }

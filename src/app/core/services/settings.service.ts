@@ -11,7 +11,9 @@ import {
   SortOption,
 } from 'src/app/shared/models';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class SettingsService {
   public isSettingsActive: Subject<boolean> = new Subject();
 
