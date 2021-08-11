@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { v4 as uuidv4 } from 'uuid';
 import { JWT_EXPIRE_TIME } from 'src/app/shared/constants/damn-is-it-a-jwt-file';
 import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
 import { User } from '../../shared/interfaces';
 
 @Injectable({
@@ -18,10 +19,10 @@ export class AuthService {
     this._userData = data;
   }
 
-  public user: Subject<User> = new Subject();
+  public user: Subject<User | null> = new Subject();
 
-  constructor() {
-    this.user.subscribe((user: User) => (this.userData = user));
+  constructor(private router: Router) {
+    this.user.subscribe((user: User | null) => (this.userData = user));
   }
 
   register(userData: User): void {
@@ -38,12 +39,23 @@ export class AuthService {
   }
 
   isAuthorized(): boolean {
+    let isNotExpired = false;
     const data = localStorage.getItem('youtube-client-auth');
     if (data) {
       const { expire, username, userId } = JSON.parse(data);
-      this.user.next({ userId, username });
-      return !(Date.now() > expire);
+      isNotExpired = AuthService.isTokenExpired(expire);
+      if (isNotExpired) this.user.next({ userId, username });
     }
-    return false;
+    return isNotExpired;
+  }
+
+  logout() {
+    this.user.next(null);
+    localStorage.removeItem('youtube-client-auth');
+    this.router.navigate(['auth']);
+  }
+
+  static isTokenExpired(expire: number): boolean {
+    return !(Date.now() > expire);
   }
 }

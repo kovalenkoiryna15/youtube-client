@@ -60,9 +60,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.isLoading = true;
     if (this.authService.isAuthorized()) {
-      setTimeout(() => {
-        this.router.navigate(['youtube']);
-      }, 2000);
+      this.router.navigate(['youtube']);
     } else {
       this.isLoading = false;
     }
@@ -77,9 +75,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
     if (!this.doControlsHaveAnyErrors() && password && username) {
       this.authService.register({ username, userId: '' });
       this.isLoading = true;
-      setTimeout(() => {
-        this.router.navigate(['youtube']);
-      }, 2000);
+      this.router.navigate(['youtube']);
     }
   }
 

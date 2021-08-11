@@ -1,4 +1,5 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, ViewChild } from '@angular/core';
+import { MatAccordion } from '@angular/material/expansion';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { User } from 'src/app/shared/interfaces';
@@ -9,19 +10,32 @@ import { User } from 'src/app/shared/interfaces';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnDestroy {
-  public username: string = 'Your name';
+  @ViewChild(MatAccordion) public accordion!: MatAccordion;
+
+  public username: string | null = null;
 
   public subscriptions: Subscription = new Subscription();
 
   constructor(private authService: AuthService) {
     this.subscriptions.add(
-      this.authService.user.subscribe(
-        (user: User) => (this.username = user.username)
+      this.authService.user.subscribe((user: User | null) =>
+        user?.username
+          ? (this.username = user?.username)
+          : (this.username = null)
       )
     );
   }
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+  }
+
+  onLogout(): void {
+    this.authService.logout();
+    this.accordion.closeAll();
+  }
+
+  onLogin(): void {
+    this.accordion.closeAll();
   }
 }

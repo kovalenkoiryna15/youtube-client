@@ -7,6 +7,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 const modules = [
   MatIconModule,
@@ -17,6 +18,7 @@ const modules = [
   MatChipsModule,
   MatCardModule,
   MatProgressSpinnerModule,
+  MatExpansionModule,
 ];
 
 @NgModule({
