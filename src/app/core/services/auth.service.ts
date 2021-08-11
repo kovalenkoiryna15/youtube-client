@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { v4 as uuidv4 } from 'uuid';
 import { JWT_EXPIRE_TIME } from 'src/app/shared/constants/damn-is-it-a-jwt-file';
 import { Subject } from 'rxjs';
-import { Router } from '@angular/router';
 import { User } from '../../shared/interfaces';
 
 @Injectable({
@@ -21,7 +20,7 @@ export class AuthService {
 
   public user: Subject<User | null> = new Subject();
 
-  constructor(private router: Router) {
+  constructor() {
     this.user.subscribe((user: User | null) => (this.userData = user));
   }
 
@@ -52,7 +51,6 @@ export class AuthService {
   logout() {
     this.user.next(null);
     localStorage.removeItem('youtube-client-auth');
-    this.router.navigate(['auth']);
   }
 
   static isTokenExpired(expire: number): boolean {

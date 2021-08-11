@@ -8,6 +8,7 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { AuthCardComponent } from './components/auth-card/auth-card.component';
 import { SharedModule } from '../shared/shared.module';
+import { AuthComponent } from './auth.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { SharedModule } from '../shared/shared.module';
     LoginPageComponent,
     LoginFormComponent,
     AuthCardComponent,
+    AuthComponent,
   ],
   imports: [
     CommonModule,
