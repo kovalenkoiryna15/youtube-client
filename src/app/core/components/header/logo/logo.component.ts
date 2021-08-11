@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class LogoComponent {
   constructor(private router: Router) {}
 
-  onLogo() {
+  onLogo(): void {
     this.router.navigate(['youtube']);
   }
 }

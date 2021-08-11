@@ -70,7 +70,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
     this.subscriptions.unsubscribe();
   }
 
-  onSubmit() {
+  onSubmit(): void {
     const { password, username } = this.formData;
     if (!this.doControlsHaveAnyErrors() && password && username) {
       this.authService.register({ username, userId: '' });

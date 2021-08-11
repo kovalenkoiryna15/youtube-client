@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { VideoService } from 'src/app/core/services';
@@ -19,7 +19,8 @@ export class DetailedInfoComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private videoService: VideoService
+    private videoService: VideoService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -38,5 +39,9 @@ export class DetailedInfoComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+  }
+
+  onGoBack(): void {
+    this.router.navigate(['youtube']);
   }
 }

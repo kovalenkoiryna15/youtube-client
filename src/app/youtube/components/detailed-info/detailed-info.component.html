@@ -1,4 +1,7 @@
 <ng-container *ngIf="videoData; else detailedInfoSpinner">
+  <button mat-flat-button (click)="onGoBack()">
+    <mat-icon>chevron_left</mat-icon>
+  </button>
   <mat-card class="card">
     <div class="card-image__wrapper">
       <img
