@@ -1,0 +1,33 @@
+sudo: false
+
+language: node_js
+
+node_js:
+  - 14
+
+dist: focal
+
+branches:
+  only:
+    - youtube-client/routing
+
+cache:
+  directories:
+    - node_modules
+
+before_install:
+  - npm i -g npm@latest
+
+install:
+  - npm install
+
+script:
+  - npm run build
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN_YC
+  local_dir: dist
+  on:
+    branch: youtube-client/routing

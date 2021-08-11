@@ -1,0 +1,55 @@
+<ng-container *ngIf="!isLoading; else spinner">
+  <form class="login-form" [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()">
+    <mat-form-field class="login-form__field">
+      <mat-label>Username</mat-label>
+      <input
+        type="text"
+        autocomplete="off"
+        matInput
+        formControlName="username"
+        maxlength="10"
+      />
+      <mat-error
+        *ngIf="
+          (loginFormGroup.controls.username.hasError('username') ||
+            loginFormGroup.controls.username.hasError('whitespace')) &&
+          !loginFormGroup.controls.username.hasError('required')
+        "
+      >
+        Please enter a valid username.
+      </mat-error>
+      <mat-error *ngIf="loginFormGroup.controls.username.hasError('required')">
+        Username is required.
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="login-form__field">
+      <mat-label>Password</mat-label>
+      <input
+        type="password"
+        autocomplete="off"
+        matInput
+        formControlName="password"
+        maxlength="10"
+      />
+      <mat-error
+        *ngIf="
+          (loginFormGroup.controls.password.hasError('password') ||
+            loginFormGroup.controls.password.hasError('whitespace')) &&
+          !loginFormGroup.controls.password.hasError('required')
+        "
+      >
+        Please enter a valid password.
+      </mat-error>
+      <mat-error *ngIf="loginFormGroup.controls.password.hasError('required')">
+        Password is required.
+      </mat-error>
+    </mat-form-field>
+    <button mat-button type="submit" class="login-form__button_submit">
+      Login
+    </button>
+  </form>
+</ng-container>
+
+<ng-template #spinner>
+  <app-spinner></app-spinner>
+</ng-template>

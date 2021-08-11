@@ -6,6 +6,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatCardModule } from '@angular/material/card';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 const modules = [
   MatIconModule,
@@ -15,6 +17,8 @@ const modules = [
   MatCheckboxModule,
   MatChipsModule,
   MatCardModule,
+  MatProgressSpinnerModule,
+  MatExpansionModule,
 ];
 
 @NgModule({
@@ -22,4 +26,4 @@ const modules = [
   exports: [...modules],
   providers: [],
 })
-export default class MaterialModule {}
+export class MaterialModule {}

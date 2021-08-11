@@ -1,0 +1,33 @@
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <ng-container *ngIf="username; else noAccounts">
+        <mat-panel-title color="accent">{{ username }}</mat-panel-title>
+        <mat-panel-description class="icon__container" color="accent">
+          <mat-icon color="primary" defaultColor="light-theme">
+            account_circle
+          </mat-icon>
+        </mat-panel-description>
+      </ng-container>
+    </mat-expansion-panel-header>
+    <ng-container *ngIf="username; else login">
+      <button mat-button (click)="onLogout()">
+        Logout
+        <mat-icon color="primary" defaultColor="light-theme"> logout </mat-icon>
+      </button>
+    </ng-container>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<ng-template #noAccounts>
+  <div class="icon__container" color="accent">
+    <mat-icon color="primary" defaultColor="light-theme">no_accounts</mat-icon>
+  </div>
+</ng-template>
+
+<ng-template #login>
+  <button mat-button (click)="onLogin()">
+    Login
+    <mat-icon color="primary" defaultColor="light-theme"> login </mat-icon>
+  </button>
+</ng-template>

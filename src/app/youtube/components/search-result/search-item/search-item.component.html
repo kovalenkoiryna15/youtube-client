@@ -1,0 +1,51 @@
+<mat-card
+  class="card"
+  [appColorizeByPublishDate]="searchItem.snippet.publishedAt"
+>
+  <div class="content__container">
+    <img
+      mat-card-image
+      [src]="searchItem.snippet.thumbnails.maxres.url"
+      [width]="searchItem.snippet.thumbnails.default.width"
+      [height]="searchItem.snippet.thumbnails.default.height"
+    />
+    <mat-card-content>
+      <section class="statistics">
+        <div class="statistics__item">
+          <mat-icon>visibility</mat-icon>
+          <span>{{ searchItem.statistics.viewCount }}</span>
+        </div>
+        <div class="statistics__item">
+          <mat-icon>favorite</mat-icon>
+          <span>{{ searchItem.statistics.likeCount }}</span>
+        </div>
+        <div class="statistics__item">
+          <mat-icon>thumb_down</mat-icon>
+          <span>{{ searchItem.statistics.dislikeCount }}</span>
+        </div>
+        <div class="statistics__item">
+          <mat-icon>chat</mat-icon>
+          <span>{{ searchItem.statistics.commentCount }}</span>
+        </div>
+      </section>
+      <div>
+        <span>{{ searchItem.snippet.publishedAt | date: 'medium' }}</span>
+      </div>
+    </mat-card-content>
+    <mat-card-header>
+      <mat-card-title>{{ searchItem.snippet.title }}</mat-card-title>
+    </mat-card-header>
+    <div class="actions">
+      <mat-card-actions class="action">
+        <button
+          mat-button
+          class="action__button"
+          color="primary"
+          (click)="onShowDetailedInfo()"
+        >
+          More...
+        </button>
+      </mat-card-actions>
+    </div>
+  </div>
+</mat-card>
