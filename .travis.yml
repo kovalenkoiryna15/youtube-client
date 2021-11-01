@@ -9,7 +9,7 @@ dist: focal
 
 branches:
   only:
-    - youtube-client/routing
+    - youtube-client/ngrx
 
 cache:
   directories:
@@ -30,4 +30,4 @@ deploy:
   github_token: $GITHUB_TOKEN_YC
   local_dir: dist
   on:
-    branch: youtube-client/routing
+    branch: youtube-client/rxjs-http

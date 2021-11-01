@@ -17,18 +17,14 @@ export class DetailedInfoComponent implements OnInit, OnDestroy {
 
   public subscriptions: Subscription = new Subscription();
 
-  constructor(
-    private route: ActivatedRoute,
-    private videoService: VideoService,
-    private router: Router
-  ) {}
+  constructor(private route: ActivatedRoute, private videoService: VideoService, private router: Router) {}
 
   ngOnInit(): void {
     this.subscriptions.add(
       this.route.params
         .pipe(
           switchMap((params: Params) => {
-            return this.videoService.getVideoDataById(params.id);
+            return this.videoService.getVideoInfoById(params.id);
           })
         )
         .subscribe((video: VideoInfo | null) => {

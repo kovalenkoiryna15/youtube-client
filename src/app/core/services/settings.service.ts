@@ -1,15 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import {
-  FilterOptions,
-  SortDirections,
-  SortOptions,
-} from 'src/app/shared/constants/settings';
-import {
-  FilterOption,
-  SettingsOptionsState,
-  SortOption,
-} from 'src/app/shared/models';
+import { FilterOptions, SortDirections, SortOptions } from 'src/app/shared/constants/settings';
+import { FilterOption, SettingsOptionsState, SortOption } from 'src/app/shared/models';
 
 @Injectable({
   providedIn: 'root',
