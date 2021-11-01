@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, ReplaySubject, Subject } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { debounceTime, map, switchMap } from 'rxjs/operators';
 import { VideoInfo } from 'src/app/shared/interfaces';
 import { SearchItemModel } from 'src/app/shared/models';
 import { environment } from 'src/environments/environment';
@@ -19,14 +19,19 @@ export class VideoService {
   public videoItems: VideoInfo[] = [];
 
   constructor(private http: HttpClient) {
-    this.searchValue.subscribe((value) => {
-      if (value) {
-        this.getSearchResult(value).subscribe((result: VideoInfo[]) => {
-          this.videoItems = result;
-          this.searchResult.next(result);
-        });
-      }
-    });
+    this.searchValue
+      .pipe(
+        map((value: any) => value),
+        debounceTime(500)
+      )
+      .subscribe((value) => {
+        if (value) {
+          this.getSearchResult(value).subscribe((result: VideoInfo[]) => {
+            this.videoItems = result;
+            this.searchResult.next(result);
+          });
+        }
+      });
   }
 
   search(): Observable<SearchItemModel[]> {
