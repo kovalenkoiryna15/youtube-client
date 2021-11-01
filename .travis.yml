@@ -9,7 +9,7 @@ dist: focal
 
 branches:
   only:
-    - youtube-client/rxjs-http
+    - youtube-client/ngrx
 
 cache:
   directories:
