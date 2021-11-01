@@ -6,7 +6,7 @@
     <div class="card-image__wrapper">
       <img
         class="card-image"
-        [src]="videoData.snippet.thumbnails.maxres.url"
+        [src]="videoData.snippet.thumbnails.high.url"
         [alt]="videoData.snippet.title"
       />
     </div>
@@ -24,19 +24,19 @@
       <section class="statistics">
         <div class="statistics__item">
           <mat-icon>visibility</mat-icon>
-          <span>{{ videoData.statistics.viewCount }}</span>
+          <span>{{ videoData.statistics?.viewCount }}</span>
         </div>
         <div class="statistics__item">
           <mat-icon>favorite</mat-icon>
-          <span>{{ videoData.statistics.likeCount }}</span>
+          <span>{{ videoData.statistics?.likeCount }}</span>
         </div>
         <div class="statistics__item">
           <mat-icon>thumb_down</mat-icon>
-          <span>{{ videoData.statistics.dislikeCount }}</span>
+          <span>{{ videoData.statistics?.dislikeCount }}</span>
         </div>
         <div class="statistics__item">
           <mat-icon>chat</mat-icon>
-          <span>{{ videoData.statistics.commentCount }}</span>
+          <span>{{ videoData.statistics?.commentCount }}</span>
         </div>
       </section>
     </mat-card-content>

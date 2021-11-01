@@ -5,7 +5,7 @@
   <div class="content__container">
     <img
       mat-card-image
-      [src]="searchItem.snippet.thumbnails.maxres.url"
+      [src]="searchItem.snippet.thumbnails.high.url"
       [width]="searchItem.snippet.thumbnails.default.width"
       [height]="searchItem.snippet.thumbnails.default.height"
     />
@@ -13,19 +13,19 @@
       <section class="statistics">
         <div class="statistics__item">
           <mat-icon>visibility</mat-icon>
-          <span>{{ searchItem.statistics.viewCount }}</span>
+          <span>{{ searchItem.statistics?.viewCount }}</span>
         </div>
         <div class="statistics__item">
           <mat-icon>favorite</mat-icon>
-          <span>{{ searchItem.statistics.likeCount }}</span>
+          <span>{{ searchItem.statistics?.likeCount }}</span>
         </div>
         <div class="statistics__item">
           <mat-icon>thumb_down</mat-icon>
-          <span>{{ searchItem.statistics.dislikeCount }}</span>
+          <span>{{ searchItem.statistics?.dislikeCount }}</span>
         </div>
         <div class="statistics__item">
           <mat-icon>chat</mat-icon>
-          <span>{{ searchItem.statistics.commentCount }}</span>
+          <span>{{ searchItem.statistics?.commentCount }}</span>
         </div>
       </section>
       <div>

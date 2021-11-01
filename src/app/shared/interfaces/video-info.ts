@@ -4,7 +4,10 @@ import { VideoStatistics } from './video-statistics';
 export interface VideoInfo {
   kind: string;
   etag: string;
-  id: string;
+  id: {
+    kind: 'string';
+    videoId: 'string';
+  };
   snippet: VideoSnippet;
   statistics: VideoStatistics;
 }

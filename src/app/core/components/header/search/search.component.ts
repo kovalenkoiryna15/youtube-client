@@ -7,6 +7,8 @@ interface FormData {
   searchInput: string | null;
 }
 
+const MIN_SEARCH_VALUE_LENGTH = 3;
+
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -22,11 +24,11 @@ export class SearchComponent implements OnDestroy {
   });
 
   constructor(private fb: FormBuilder, public videoService: VideoService) {
-    this.formValueSubscription = this.searchFormGroup.valueChanges.subscribe(
-      (value: FormData) => {
-        this.formData = value;
-      }
-    );
+    this.formValueSubscription = this.searchFormGroup.valueChanges.subscribe((value: FormData) => {
+      console.log(value);
+      this.formData = value;
+      this.search();
+    });
   }
 
   ngOnDestroy() {
@@ -37,17 +39,8 @@ export class SearchComponent implements OnDestroy {
     this.searchFormGroup.controls.searchInput.reset();
   }
 
-  onSubmit() {
-    this.search();
-  }
-
-  onKeyDown(event: Event) {
-    event.preventDefault();
-    this.search();
-  }
-
   search() {
-    if (this.formData?.searchInput) {
+    if (this.formData?.searchInput && this.formData?.searchInput.trim().length >= MIN_SEARCH_VALUE_LENGTH) {
       this.videoService.searchValue.next(this.formData.searchInput);
     }
   }

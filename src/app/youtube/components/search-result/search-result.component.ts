@@ -1,11 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { SettingsService, VideoService } from 'src/app/core/services';
-import {
-  FilterOption,
-  SearchItemModel,
-  SortOption,
-  SettingsOptionsStatus,
-} from 'src/app/shared/models';
+import { FilterOption, SearchItemModel, SortOption, SettingsOptionsStatus } from 'src/app/shared/models';
 import { FilterOptions, SortOptions } from 'src/app/shared/constants/settings';
 import { Subscription } from 'rxjs';
 import { FilterPipe, SortPipe } from '../../pipes';
@@ -31,27 +26,17 @@ export class SearchResultComponent implements OnDestroy {
     private filterPipe: FilterPipe
   ) {
     this.settingsOptionsStatus = {
-      [SortOptions.ByDate]:
-        this.settingsService.optionsState[SortOptions.ByDate].enabled,
-      [SortOptions.ByViewCount]:
-        this.settingsService.optionsState[SortOptions.ByViewCount].enabled,
-      [FilterOptions.ByTitle]:
-        this.settingsService.optionsState[FilterOptions.ByTitle].enabled,
-      [FilterOptions.ByTags]:
-        this.settingsService.optionsState[FilterOptions.ByTags].enabled,
+      [SortOptions.ByDate]: this.settingsService.optionsState[SortOptions.ByDate].enabled,
+      [SortOptions.ByViewCount]: this.settingsService.optionsState[SortOptions.ByViewCount].enabled,
+      [FilterOptions.ByTitle]: this.settingsService.optionsState[FilterOptions.ByTitle].enabled,
+      [FilterOptions.ByTags]: this.settingsService.optionsState[FilterOptions.ByTags].enabled,
     };
 
     this.subscriptions.add(
-      this.settingsService.isSettingsActive.subscribe(
-        (status: boolean) => (this.isSettingsActive = status)
-      )
+      this.settingsService.isSettingsActive.subscribe((status: boolean) => (this.isSettingsActive = status))
     );
 
-    this.subscriptions.add(
-      this.videoService
-        .search()
-        .subscribe((result) => (this.searchResultList = result))
-    );
+    this.subscriptions.add(this.videoService.search().subscribe((result) => (this.searchResultList = result)));
 
     this.subscriptions.add(
       this.settingsService.sortByDate.subscribe((option: SortOption) => {
@@ -71,10 +56,7 @@ export class SearchResultComponent implements OnDestroy {
       this.settingsService.filterByTitle.subscribe((option: FilterOption) => {
         this.updateOptionStatus(option);
         this.recoverSearchResultList();
-        this.searchResultList = this.filterPipe.transform(
-          this.searchResultList,
-          option
-        );
+        this.searchResultList = this.filterPipe.transform(this.searchResultList, option);
 
         if (this.isSomeSortOptionEnabled()) {
           if (this.settingsOptionsStatus[SortOptions.ByDate]) {
@@ -112,26 +94,19 @@ export class SearchResultComponent implements OnDestroy {
 
   transform(option: SortOption): void {
     if (option.enabled) {
-      this.searchResultList = this.sortPipe.transform(
-        this.searchResultList,
-        option
-      );
+      this.searchResultList = this.sortPipe.transform(this.searchResultList, option);
     }
   }
 
   isSomeSortOptionEnabled(): boolean {
-    return Object.values(this.settingsOptionsStatus).some(
-      (optionStatus) => optionStatus === true
-    );
+    return Object.values(this.settingsOptionsStatus).some((optionStatus) => optionStatus === true);
   }
 
   areAllSettingstOptionsDisabled(): boolean {
-    return Object.values(this.settingsOptionsStatus).every(
-      (optionStatus) => optionStatus === false
-    );
+    return Object.values(this.settingsOptionsStatus).every((optionStatus) => optionStatus === false);
   }
 
   recoverSearchResultList(): void {
-    this.searchResultList = this.videoService.mockResponse.items;
+    this.searchResultList = this.videoService.videoItems;
   }
 }
