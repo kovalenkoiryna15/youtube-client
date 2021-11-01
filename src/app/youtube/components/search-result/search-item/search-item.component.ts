@@ -14,6 +14,6 @@ export class SearchItemComponent {
   constructor(private router: Router) {}
 
   onShowDetailedInfo() {
-    this.router.navigate([`youtube/detailed-info/${this.searchItem.id.videoId}`]);
+    this.router.navigate([`youtube/detailed-info/${this.searchItem.id}`]);
   }
 }

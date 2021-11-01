@@ -15,6 +15,7 @@ const environmentFileContent = `
 export const environment = {
   production: ${isProduction},
   API_KEY: "${process.env.API_KEY}",
+  YOUTUBE_API_URL: "https://www.googleapis.com/youtube/v3",
 };
 `;
 
