@@ -1,3 +1,3 @@
-import { VideoSnippet } from '../interfaces';
+import { VideoInfo } from '../interfaces';
 
-export type CardFormData = Pick<VideoSnippet, 'title' | 'description'>;
+export interface CardFormData extends VideoInfo {}

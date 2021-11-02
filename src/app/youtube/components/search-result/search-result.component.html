@@ -13,6 +13,17 @@
   </div>
 </ng-container>
 
+<ng-container *ngIf="customVideoList$ | async">
+  <div class="search-result__container">
+    <div class="search-result__content">
+      <app-search-item
+        *ngFor="let video of customVideoList$ | async"
+        [searchItem]="video"
+      ></app-search-item>
+    </div>
+  </div>
+</ng-container>
+
 <ng-template #noResults>
   <div class="search-result__container">
     <p>No Results...</p>
