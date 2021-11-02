@@ -13,7 +13,7 @@ import { VideoInfo } from 'src/app/shared/interfaces';
 export class DetailedInfoComponent implements OnInit, OnDestroy {
   public id: string = '';
 
-  public videoData?: VideoInfo;
+  public videoData: VideoInfo | null = null;
 
   public subscriptions: Subscription = new Subscription();
 

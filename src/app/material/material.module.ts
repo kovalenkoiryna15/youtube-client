@@ -8,6 +8,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 const modules = [
   MatIconModule,
@@ -19,6 +20,7 @@ const modules = [
   MatCardModule,
   MatProgressSpinnerModule,
   MatExpansionModule,
+  MatSidenavModule,
 ];
 
 @NgModule({

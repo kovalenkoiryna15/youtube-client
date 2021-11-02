@@ -1,0 +1,47 @@
+<form class="card-form" [formGroup]="cardFormGroup" (ngSubmit)="onSubmit()">
+  <mat-form-field class="card-form__field">
+    <mat-label>Title</mat-label>
+    <input
+      type="text"
+      autocomplete="off"
+      matInput
+      formControlName="title"
+      maxlength="10"
+    />
+    <mat-error
+      *ngIf="
+        cardFormGroup.controls.title.hasError('whitespace') &&
+        !cardFormGroup.controls.title.hasError('required')
+      "
+    >
+      Please enter a valid title.
+    </mat-error>
+    <mat-error *ngIf="cardFormGroup.controls.title.hasError('required')">
+      Title is required.
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="card-form__field">
+    <mat-label>Description</mat-label>
+    <input
+      type="description"
+      autocomplete="off"
+      matInput
+      formControlName="description"
+      maxlength="10"
+    />
+    <mat-error
+      *ngIf="
+        cardFormGroup.controls.description.hasError('whitespace') &&
+        !cardFormGroup.controls.description.hasError('required')
+      "
+    >
+      Please enter a valid description.
+    </mat-error>
+    <mat-error *ngIf="cardFormGroup.controls.description.hasError('required')">
+      Description is required.
+    </mat-error>
+  </mat-form-field>
+  <button mat-button type="submit" class="card-form__button_submit">
+    Create
+  </button>
+</form>
