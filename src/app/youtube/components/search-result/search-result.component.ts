@@ -33,27 +33,27 @@ export class SearchResultComponent implements OnDestroy {
     };
 
     this.subscriptions.add(
-      this.settingsService.isSettingsActive.subscribe((status: boolean) => (this.isSettingsActive = status))
+      this.settingsService.isSettingsActive$.subscribe((status: boolean) => (this.isSettingsActive = status))
     );
 
     this.subscriptions.add(this.videoService.search().subscribe((result) => (this.searchResultList = result)));
 
     this.subscriptions.add(
-      this.settingsService.sortByDate.subscribe((option: SortOption) => {
+      this.settingsService.sortByDate$.subscribe((option: SortOption) => {
         this.updateOptionStatus(option);
         this.transform(option);
       })
     );
 
     this.subscriptions.add(
-      this.settingsService.sortByViewCount.subscribe((option: SortOption) => {
+      this.settingsService.sortByViewCount$.subscribe((option: SortOption) => {
         this.updateOptionStatus(option);
         this.transform(option);
       })
     );
 
     this.subscriptions.add(
-      this.settingsService.filterByTitle.subscribe((option: FilterOption) => {
+      this.settingsService.filterByTitle$.subscribe((option: FilterOption) => {
         this.updateOptionStatus(option);
         this.recoverSearchResultList();
         this.searchResultList = this.filterPipe.transform(this.searchResultList, option);

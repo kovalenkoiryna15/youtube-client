@@ -2,7 +2,7 @@
   <app-settings class="settings__container"></app-settings>
 </ng-container>
 
-<ng-container *ngIf="searchResultList.length > 0; else noResults">
+<ng-container *ngIf="searchResultList.length; else noResults">
   <div class="search-result__container">
     <div class="search-result__content">
       <app-search-item

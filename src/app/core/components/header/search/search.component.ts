@@ -12,7 +12,9 @@ import { FormData } from './form-model';
 export class SearchComponent implements OnDestroy {
   private readonly MIN_SEARCH_VALUE_LENGTH = 3;
 
-  public formData?: FormData;
+  public formData: FormData = {
+    searchInput: null,
+  };
 
   public formValueSubscription: Subscription;
 
@@ -37,7 +39,7 @@ export class SearchComponent implements OnDestroy {
 
   search() {
     if (this.formData?.searchInput && this.formData?.searchInput.trim().length >= this.MIN_SEARCH_VALUE_LENGTH) {
-      this.videoService.searchValue.next(this.formData.searchInput);
+      this.videoService.searchValue$.next(this.formData.searchInput);
     }
   }
 }

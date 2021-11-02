@@ -19,10 +19,8 @@ export class LoginComponent implements OnDestroy {
 
   constructor(private authService: AuthService, private router: Router) {
     this.subscriptions.add(
-      this.authService.user.subscribe((user: User | null) =>
-        user?.username
-          ? (this.username = user?.username)
-          : (this.username = null)
+      this.authService.user$.subscribe((user: User | null) =>
+        user?.username ? (this.username = user?.username) : (this.username = null)
       )
     );
   }

@@ -1,11 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormControl,
-  ValidationErrors,
-  Validators,
-} from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -25,19 +19,11 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   public loginFormGroup = this.fb.group({
     username: [
       null,
-      [
-        Validators.required,
-        LoginFormComponent.noWhitespaceValidator,
-        LoginFormComponent.usernameValidator,
-      ],
+      [Validators.required, LoginFormComponent.noWhitespaceValidator, LoginFormComponent.usernameValidator],
     ],
     password: [
       null,
-      [
-        Validators.required,
-        LoginFormComponent.noWhitespaceValidator,
-        LoginFormComponent.passwordValidator,
-      ],
+      [Validators.required, LoginFormComponent.noWhitespaceValidator, LoginFormComponent.passwordValidator],
     ],
   });
 
@@ -45,16 +31,8 @@ export class LoginFormComponent implements OnInit, OnDestroy {
 
   public subscriptions: Subscription = new Subscription();
 
-  constructor(
-    private fb: FormBuilder,
-    private authService: AuthService,
-    private router: Router
-  ) {
-    this.subscriptions.add(
-      this.loginFormGroup.valueChanges.subscribe(
-        (data) => (this.formData = data)
-      )
-    );
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+    this.subscriptions.add(this.loginFormGroup.valueChanges.subscribe((data) => (this.formData = data)));
   }
 
   ngOnInit() {
@@ -80,9 +58,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   }
 
   doControlsHaveAnyErrors(): boolean {
-    return Object.values(this.loginFormGroup.controls).every(
-      (control: AbstractControl) => !!control.errors
-    );
+    return Object.values(this.loginFormGroup.controls).every((control: AbstractControl) => !!control.errors);
   }
 
   static noWhitespaceValidator(control: FormControl): ValidationErrors | null {

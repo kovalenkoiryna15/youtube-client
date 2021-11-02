@@ -18,16 +18,16 @@ export class AuthService {
     this._userData = data;
   }
 
-  public user: Subject<User | null> = new Subject();
+  public user$: Subject<User | null> = new Subject();
 
   constructor() {
-    this.user.subscribe((user: User | null) => (this.userData = user));
+    this.user$.subscribe((user: User | null) => (this.userData = user));
   }
 
   register(userData: User): void {
     const { username } = userData;
     const userId = uuidv4();
-    this.user.next({ userId, username });
+    this.user$.next({ userId, username });
     localStorage.setItem(
       'youtube-client-auth',
       JSON.stringify({
@@ -38,18 +38,18 @@ export class AuthService {
   }
 
   isAuthorized(): boolean {
-    let isNotExpired = false;
     const data = localStorage.getItem('youtube-client-auth');
     if (data) {
       const { expire, username, userId } = JSON.parse(data);
-      isNotExpired = AuthService.isTokenExpired(expire);
-      if (isNotExpired) this.user.next({ userId, username });
+      const isNotExpired = AuthService.isTokenExpired(expire);
+      if (isNotExpired) this.user$.next({ userId, username });
+      return true;
     }
-    return isNotExpired;
+    return false;
   }
 
   logout() {
-    this.user.next(null);
+    this.user$.next(null);
     localStorage.removeItem('youtube-client-auth');
   }
 

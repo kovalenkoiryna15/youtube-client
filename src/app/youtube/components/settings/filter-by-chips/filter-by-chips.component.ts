@@ -25,8 +25,7 @@ export class FilterByTagsComponent {
   public filterByTitleOption: FilterOption;
 
   constructor(private settingsService: SettingsService) {
-    this.filterByTitleOption =
-      this.settingsService.optionsState[FilterOptions.ByTitle];
+    this.filterByTitleOption = this.settingsService.optionsState[FilterOptions.ByTitle];
   }
 
   remove(fruit: string): void {
@@ -38,7 +37,7 @@ export class FilterByTagsComponent {
       if (this.filterByTitleOption.enabled && this.chips.length < 1) {
         this.filterByTitleOption.enabled = false;
       }
-      this.settingsService.filterByTitle.next(this.filterByTitleOption);
+      this.settingsService.filterByTitle$.next(this.filterByTitleOption);
     }
   }
 
@@ -51,7 +50,7 @@ export class FilterByTagsComponent {
       if (!this.filterByTitleOption.enabled) {
         this.filterByTitleOption.enabled = true;
       }
-      this.settingsService.filterByTitle.next(this.filterByTitleOption);
+      this.settingsService.filterByTitle$.next(this.filterByTitleOption);
     }
 
     event.chipInput!.clear();
