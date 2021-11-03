@@ -20,9 +20,7 @@ export class FilterPipe implements PipeTransform {
 
   filterByTitle(words: string[]): void {
     words.forEach((word) => {
-      this.transformed = this.transformed.filter((item: SearchItemModel) =>
-        item.snippet.title.match(new RegExp(word, 'i'))
-      );
+      this.transformed = this.transformed.filter((item: SearchItemModel) => item.snippet.title.match(new RegExp(word, 'i')));
     });
   }
 }

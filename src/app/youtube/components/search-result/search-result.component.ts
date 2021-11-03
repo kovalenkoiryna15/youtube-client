@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { VideoInfo } from 'src/app/shared/interfaces';
 import { selectVideos, selectLocalVideos } from 'src/app/store/selectors';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { FilterPipe, SortPipe } from '../../pipes';
 
 @Component({
@@ -34,7 +34,6 @@ export class SearchResultComponent implements OnDestroy {
     private filterPipe: FilterPipe,
     private readonly store: Store,
     private route: ActivatedRoute,
-    private router: Router,
   ) {
     this.subscriptions.add(this.store.select(selectLocalVideos).subscribe((videos) => (this.customVideoList = videos)));
 
