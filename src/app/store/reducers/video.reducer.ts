@@ -2,7 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import { VideoInfo } from 'src/app/shared/interfaces';
 import { CardFormData } from 'src/app/shared/models';
 import _ from 'lodash';
-import { addVideo, deleteVideo } from '../actions';
+import { addVideo, deleteVideo, loadSearchResultSuccess } from '../actions';
 import mocks from '../../shared/mocks/response.json';
 
 export interface VideosState {
@@ -22,5 +22,9 @@ export const videoReducer = createReducer(
   on(deleteVideo, (state, { id }) => ({
     ..._.cloneDeep(state),
     videos: state.videos.filter((video) => video.id !== id),
+  })),
+  on(loadSearchResultSuccess, (state, { videos }) => ({
+    ..._.cloneDeep(state),
+    videos,
   })),
 );

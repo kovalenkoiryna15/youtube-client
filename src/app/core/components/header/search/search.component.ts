@@ -1,7 +1,8 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { VideoService } from 'src/app/core/services';
+import { loadSearchResult } from 'src/app/store/actions';
 import { FormData } from './form-model';
 
 @Component({
@@ -22,7 +23,7 @@ export class SearchComponent implements OnDestroy {
     searchInput: [''],
   });
 
-  constructor(private fb: FormBuilder, public videoService: VideoService) {
+  constructor(private fb: FormBuilder, private readonly store: Store) {
     this.formValueSubscription = this.searchFormGroup.valueChanges.subscribe((value: FormData) => {
       this.formData = value;
       this.search();
@@ -39,7 +40,7 @@ export class SearchComponent implements OnDestroy {
 
   search() {
     if (this.formData?.searchInput && this.formData?.searchInput.trim().length >= this.MIN_SEARCH_VALUE_LENGTH) {
-      this.videoService.searchValue$.next(this.formData.searchInput);
+      this.store.dispatch(loadSearchResult({ value: this.formData.searchInput }));
     }
   }
 }

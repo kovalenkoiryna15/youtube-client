@@ -23,7 +23,7 @@ export class VideoService {
     this.searchValue$
       .pipe(
         map((value: string) => value),
-        debounceTime(500)
+        debounceTime(500),
       )
       .subscribe((value) => {
         this.getSearchResult(value).subscribe((videos: any[]) => {
