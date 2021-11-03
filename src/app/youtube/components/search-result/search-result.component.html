@@ -2,22 +2,24 @@
   <app-settings class="settings__container"></app-settings>
 </ng-container>
 
-<ng-container *ngIf="searchResultList.length; else noResults">
-  <div class="search-result__container">
-    <div class="search-result__content">
-      <app-search-item
-        *ngFor="let searchItem of searchResultList"
-        [searchItem]="searchItem"
-      ></app-search-item>
+<ng-container *ngIf="currentPage !== 'admin-dashboard'">
+  <ng-container *ngIf="searchResultList.length; else noResults">
+    <div class="search-result__container">
+      <div class="search-result__content">
+        <app-search-item
+          *ngFor="let searchItem of searchResultList"
+          [searchItem]="searchItem"
+        ></app-search-item>
+      </div>
     </div>
-  </div>
+  </ng-container>
 </ng-container>
 
-<ng-container *ngIf="customVideoList$ | async">
+<ng-container *ngIf="customVideoList.length; else noResults">
   <div class="search-result__container">
     <div class="search-result__content">
       <app-search-item
-        *ngFor="let video of customVideoList$ | async"
+        *ngFor="let video of customVideoList"
         [searchItem]="video"
       ></app-search-item>
     </div>

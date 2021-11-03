@@ -3,7 +3,6 @@ import { VideosState } from '../reducers';
 
 export const selectVideosFeature = createFeatureSelector<VideosState>('videos');
 
-export const selectVideos = createSelector(
-  selectVideosFeature,
-  (state: VideosState) => state.videos,
-);
+export const selectVideos = createSelector(selectVideosFeature, (state: VideosState) => state.videos);
+
+export const selectLocalVideos = createSelector(selectVideosFeature, (state: VideosState) => state.localVideos);

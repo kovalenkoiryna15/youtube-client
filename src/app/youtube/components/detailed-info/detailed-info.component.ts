@@ -25,11 +25,11 @@ export class DetailedInfoComponent implements OnInit, OnDestroy {
         .pipe(
           switchMap((params: Params) => {
             return this.videoService.getVideoInfoById(params.id);
-          })
+          }),
         )
         .subscribe((video: VideoInfo | null) => {
           if (video) this.videoData = video;
-        })
+        }),
     );
   }
 

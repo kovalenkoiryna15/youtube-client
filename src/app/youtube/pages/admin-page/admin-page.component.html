@@ -1,1 +1,9 @@
-<app-admin-dashboard></app-admin-dashboard>
+<mat-drawer-container class="drawer-container">
+  <mat-drawer #drawer mode="side">
+    <app-sidebar></app-sidebar>
+  </mat-drawer>
+  <mat-drawer-content>
+    <app-sidebar-switcher (toggleSidebar)="onToggle()"></app-sidebar-switcher>
+    <app-admin-dashboard></app-admin-dashboard>
+  </mat-drawer-content>
+</mat-drawer-container>

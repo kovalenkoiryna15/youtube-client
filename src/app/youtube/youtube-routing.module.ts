@@ -11,6 +11,7 @@ const routes: Routes = [
       { path: 'search-result', component: MainPageComponent },
       { path: 'detailed-info/:id', component: DetailedInfoPageComponent },
       { path: 'admin-dashboard', component: AdminPageComponent },
+      { path: 'admin-dashboard/cards', component: MainPageComponent },
       {
         path: '',
         redirectTo: 'search-result',

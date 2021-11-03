@@ -7,21 +7,24 @@ import mocks from '../../shared/mocks/response.json';
 
 export interface VideosState {
   videos: (VideoInfo | CardFormData)[];
+  localVideos: (VideoInfo | CardFormData)[];
 }
 
 const initialState: VideosState = {
-  videos: mocks.items,
+  videos: [],
+  localVideos: [...mocks.items],
 };
 
 export const videoReducer = createReducer(
   initialState,
   on(addVideo, (state, { videoInfo }) => ({
     ..._.cloneDeep(state),
-    videos: [...state.videos, videoInfo],
+    localVideos: [...state.videos, videoInfo],
   })),
   on(deleteVideo, (state, { id }) => ({
     ..._.cloneDeep(state),
     videos: state.videos.filter((video) => video.id !== id),
+    localVideos: state.videos.filter((video) => video.id !== id),
   })),
   on(loadSearchResultSuccess, (state, { videos }) => ({
     ..._.cloneDeep(state),

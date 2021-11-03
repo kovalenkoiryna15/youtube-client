@@ -12,4 +12,8 @@ export class SidebarComponent {
   onCreate(): void {
     this.router.navigate(['youtube/admin-dashboard']);
   }
+
+  onShowAllCards(): void {
+    this.router.navigate(['youtube/admin-dashboard/cards']);
+  }
 }
