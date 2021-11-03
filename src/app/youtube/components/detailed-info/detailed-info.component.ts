@@ -22,11 +22,7 @@ export class DetailedInfoComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscriptions.add(
       this.route.params
-        .pipe(
-          switchMap((params: Params) => {
-            return this.videoService.getVideoInfoById(params.id);
-          }),
-        )
+        .pipe(switchMap((params: Params) => this.videoService.getVideoInfoById(params.id)))
         .subscribe((video: VideoInfo | null) => {
           if (video) this.videoData = video;
         }),

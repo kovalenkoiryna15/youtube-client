@@ -4,6 +4,7 @@ import { forkJoin, Observable, ReplaySubject, Subject } from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
 import { VideoInfo } from 'src/app/shared/interfaces';
 import { SearchItemModel } from 'src/app/shared/models';
+import _ from 'lodash';
 
 @Injectable({
   providedIn: 'root',
@@ -52,7 +53,14 @@ export class VideoService {
           maxResults: '10',
         },
       })
-      .pipe(map((data: any) => data.items));
+      .pipe(
+        map((data: any) =>
+          data.items.map((item: any) => ({
+            ..._.cloneDeep(item),
+            id: item.id.videoId,
+          })),
+        ),
+      );
   }
 
   getVideoInfoById(id: string): Observable<VideoInfo> {
