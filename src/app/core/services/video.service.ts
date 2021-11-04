@@ -4,6 +4,8 @@ import { forkJoin, Observable, ReplaySubject, Subject } from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
 import { VideoInfo } from 'src/app/shared/interfaces';
 import { SearchItemModel } from 'src/app/shared/models';
+import _ from 'lodash';
+import { YOUTUBE } from 'src/app/shared/constants';
 
 @Injectable({
   providedIn: 'root',
@@ -13,23 +15,23 @@ export class VideoService {
 
   private readonly VIDEOS_URL = `videos`;
 
-  public searchResult: ReplaySubject<SearchItemModel[]> = new ReplaySubject(1);
+  public searchResult$: ReplaySubject<SearchItemModel[]> = new ReplaySubject(1);
 
-  public searchValue: Subject<string> = new Subject();
+  public searchValue$: Subject<string> = new Subject();
 
   public videoItems: VideoInfo[] = [];
 
   constructor(private http: HttpClient) {
-    this.searchValue
+    this.searchValue$
       .pipe(
-        map((value: any) => value),
-        debounceTime(500)
+        map((value: string) => value),
+        debounceTime(500),
       )
       .subscribe((value) => {
         this.getSearchResult(value).subscribe((videos: any[]) => {
           const batch = videos.map((video) => this.getVideoInfoById(video.id.videoId));
           forkJoin(batch).subscribe((data: VideoInfo[]) => {
-            this.searchResult.next(data);
+            this.searchResult$.next(data);
             this.videoItems = data;
           });
         });
@@ -37,7 +39,7 @@ export class VideoService {
   }
 
   search(): Observable<SearchItemModel[]> {
-    return this.searchResult;
+    return this.searchResult$;
   }
 
   getSearchResult(value: string): Observable<any> {
@@ -52,7 +54,15 @@ export class VideoService {
           maxResults: '10',
         },
       })
-      .pipe(map((data: any) => data.items));
+      .pipe(
+        map((data: any) =>
+          data.items.map((item: any) => ({
+            ..._.cloneDeep(item),
+            id: item.id.videoId,
+            source: YOUTUBE,
+          })),
+        ),
+      );
   }
 
   getVideoInfoById(id: string): Observable<VideoInfo> {

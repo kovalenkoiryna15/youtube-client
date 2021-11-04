@@ -1,42 +1,36 @@
-<ng-container *ngIf="videoData; else detailedInfoSpinner">
+<ng-container *ngIf="video; else detailedInfoSpinner">
   <button mat-flat-button (click)="onGoBack()">
     <mat-icon>chevron_left</mat-icon>
   </button>
   <mat-card class="card">
     <div class="card-image__wrapper">
-      <img
-        class="card-image"
-        [src]="videoData.snippet.thumbnails.high.url"
-        [alt]="videoData.snippet.title"
-      />
+      <img class="card-image" [src]="video.snippet.thumbnails.high.url" [alt]="video.snippet.title" />
     </div>
     <mat-card-content class="card__content">
       <mat-card-header>
-        <mat-card-title>{{ videoData.snippet.title }}</mat-card-title>
-        <mat-card-subtitle>{{
-          videoData.snippet.publishedAt | date: 'medium'
-        }}</mat-card-subtitle>
+        <mat-card-title>{{ video.snippet.title }}</mat-card-title>
+        <mat-card-subtitle>{{ video.snippet.publishedAt | date: 'medium' }}</mat-card-subtitle>
       </mat-card-header>
       <div class="card-description">
         <div><strong>Description:</strong></div>
-        <div>{{ videoData.snippet.description }}</div>
+        <div>{{ video.snippet.description }}</div>
       </div>
       <section class="statistics">
         <div class="statistics__item">
           <mat-icon>visibility</mat-icon>
-          <span>{{ videoData.statistics?.viewCount }}</span>
+          <span>{{ video.statistics?.viewCount }}</span>
         </div>
         <div class="statistics__item">
           <mat-icon>favorite</mat-icon>
-          <span>{{ videoData.statistics?.likeCount }}</span>
+          <span>{{ video.statistics?.likeCount }}</span>
         </div>
         <div class="statistics__item">
           <mat-icon>thumb_down</mat-icon>
-          <span>{{ videoData.statistics?.dislikeCount }}</span>
+          <span>{{ video.statistics?.dislikeCount }}</span>
         </div>
         <div class="statistics__item">
           <mat-icon>chat</mat-icon>
-          <span>{{ videoData.statistics?.commentCount }}</span>
+          <span>{{ video.statistics?.commentCount }}</span>
         </div>
       </section>
     </mat-card-content>

@@ -2,16 +2,54 @@
   <app-settings class="settings__container"></app-settings>
 </ng-container>
 
-<ng-container *ngIf="searchResultList.length > 0; else noResults">
-  <div class="search-result__container">
-    <div class="search-result__content">
-      <app-search-item
-        *ngFor="let searchItem of searchResultList"
-        [searchItem]="searchItem"
-      ></app-search-item>
-    </div>
-  </div>
+<ng-container *ngIf="currentPage !== 'admin-dashboard'; else adminDashboard">
+  <mat-accordion [multi]="true">
+    <mat-expansion-panel [expanded]="true" class="expansion-panel">
+      <mat-expansion-panel-header>
+        <mat-panel-title> Videos from Youtube </mat-panel-title>
+      </mat-expansion-panel-header>
+      <ng-container *ngIf="searchResultList.length; else noResults">
+        <div class="search-result__container">
+          <div class="search-result__content">
+            <app-search-item
+              *ngFor="let searchItem of searchResultList"
+              [searchItem]="searchItem"
+            ></app-search-item>
+          </div>
+        </div>
+      </ng-container>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="true" class="expansion-panel">
+      <mat-expansion-panel-header>
+        <mat-panel-title> My Videos </mat-panel-title>
+      </mat-expansion-panel-header>
+      <ng-container *ngIf="customVideoList.length; else noResults">
+        <div class="search-result__container">
+          <div class="search-result__content">
+            <app-search-item
+              *ngFor="let video of customVideoList"
+              [searchItem]="video"
+            ></app-search-item>
+          </div>
+        </div>
+      </ng-container>
+    </mat-expansion-panel>
+  </mat-accordion>
 </ng-container>
+
+<ng-template #adminDashboard>
+  <ng-container *ngIf="customVideoList.length; else noResults">
+    <div class="search-result__container">
+      <div class="search-result__content">
+        <app-search-item
+          *ngFor="let video of customVideoList"
+          [searchItem]="video"
+        ></app-search-item>
+      </div>
+    </div>
+  </ng-container>
+</ng-template>
 
 <ng-template #noResults>
   <div class="search-result__container">

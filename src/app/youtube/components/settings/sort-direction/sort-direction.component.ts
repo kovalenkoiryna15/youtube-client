@@ -11,9 +11,7 @@ export class SortDirectionComponent implements OnInit {
 
   public isInIncresingOrder: boolean = false;
 
-  @Output() changeOderDirection: EventEmitter<
-    SortDirections.Increase | SortDirections.Decrease
-  > = new EventEmitter();
+  @Output() changeOderDirection: EventEmitter<SortDirections.Increase | SortDirections.Decrease> = new EventEmitter();
 
   ngOnInit(): void {
     if (this.sortDirection === SortDirections.Increase) {
@@ -23,9 +21,7 @@ export class SortDirectionComponent implements OnInit {
 
   togleOrderDirection() {
     this.isInIncresingOrder = !this.isInIncresingOrder;
-    const direction = this.isInIncresingOrder
-      ? SortDirections.Increase
-      : SortDirections.Decrease;
+    const direction = this.isInIncresingOrder ? SortDirections.Increase : SortDirections.Decrease;
 
     this.changeOderDirection.emit(direction);
   }

@@ -13,6 +13,6 @@ export class SettingsButtonComponent {
 
   onChange() {
     this.isSettingsActive = !this.isSettingsActive;
-    this.settingsService.isSettingsActive.next(this.isSettingsActive);
+    this.settingsService.isSettingsActive$.next(this.isSettingsActive);
   }
 }

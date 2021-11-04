@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DetailedInfoPageComponent, MainPageComponent } from './pages';
+import { AdminPageComponent, DetailedInfoPageComponent, MainPageComponent } from './pages';
 import { YoutubeComponent } from './youtube.component';
 
 const routes: Routes = [
@@ -10,6 +10,8 @@ const routes: Routes = [
     children: [
       { path: 'search-result', component: MainPageComponent },
       { path: 'detailed-info/:id', component: DetailedInfoPageComponent },
+      { path: 'admin-dashboard', component: AdminPageComponent },
+      { path: 'admin-dashboard/cards', component: MainPageComponent },
       {
         path: '',
         redirectTo: 'search-result',

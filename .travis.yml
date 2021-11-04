@@ -30,4 +30,4 @@ deploy:
   github_token: $GITHUB_TOKEN_YC
   local_dir: dist
   on:
-    branch: youtube-client/rxjs-http
+    branch: youtube-client/ngrx

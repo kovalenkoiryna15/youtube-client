@@ -1,1 +1,9 @@
-<app-search-result></app-search-result>
+<mat-drawer-container class="drawer-container">
+  <mat-drawer #drawer mode="side">
+    <app-sidebar></app-sidebar>
+  </mat-drawer>
+  <mat-drawer-content>
+    <app-sidebar-switcher (toggleSidebar)="onToggle()"></app-sidebar-switcher>
+    <app-search-result></app-search-result>
+  </mat-drawer-content>
+</mat-drawer-container>
