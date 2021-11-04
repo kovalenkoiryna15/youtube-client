@@ -1,7 +1,7 @@
 import { VideoThumbnail } from './video-thumbnail';
 
 export interface VideoThumbnails {
-  default: VideoThumbnail;
+  default?: VideoThumbnail;
   medium?: VideoThumbnail;
   high: VideoThumbnail;
   standard?: VideoThumbnail;

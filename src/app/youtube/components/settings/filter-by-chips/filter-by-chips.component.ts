@@ -28,8 +28,8 @@ export class FilterByTagsComponent {
     this.filterByTitleOption = this.settingsService.optionsState[FilterOptions.ByTitle];
   }
 
-  remove(fruit: string): void {
-    const index = this.chips.indexOf(fruit);
+  remove(chip: string): void {
+    const index = this.chips.indexOf(chip);
 
     if (index >= 0) {
       this.chips.splice(index, 1);

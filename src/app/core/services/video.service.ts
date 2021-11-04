@@ -5,6 +5,7 @@ import { debounceTime, map } from 'rxjs/operators';
 import { VideoInfo } from 'src/app/shared/interfaces';
 import { SearchItemModel } from 'src/app/shared/models';
 import _ from 'lodash';
+import { YOUTUBE } from 'src/app/shared/constants';
 
 @Injectable({
   providedIn: 'root',
@@ -58,6 +59,7 @@ export class VideoService {
           data.items.map((item: any) => ({
             ..._.cloneDeep(item),
             id: item.id.videoId,
+            source: YOUTUBE,
           })),
         ),
       );

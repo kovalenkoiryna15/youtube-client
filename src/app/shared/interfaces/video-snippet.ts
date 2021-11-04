@@ -2,17 +2,17 @@ import { VideoThumbnails } from './video-thumbnails';
 
 export interface VideoSnippet {
   publishedAt: string;
-  channelId: string;
   title: string;
   description: string;
   thumbnails: VideoThumbnails;
+  channelId?: string;
   channelTitle: string;
   tags: string[];
-  categoryId: string;
-  liveBroadcastContent: string;
-  localized: {
+  categoryId?: string;
+  liveBroadcastContent?: string;
+  localized?: {
     title: string;
     description: string;
   };
-  defaultAudioLanguage: string;
+  defaultAudioLanguage?: string;
 }

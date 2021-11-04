@@ -10,7 +10,7 @@ YoutubeClient uses [youtube's data API](https://developers.google.com/youtube/v3
 
 ### Installation
 
-Add your `.env` file with your private API key to the root folder.
+Add your `.env` file with your private API key (`API_KEY=...`) to the root folder.
 
 Run in dev mode:
 ```bash

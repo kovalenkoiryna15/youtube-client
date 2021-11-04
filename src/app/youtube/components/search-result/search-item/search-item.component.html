@@ -1,13 +1,10 @@
-<mat-card
-  class="card"
-  [appColorizeByPublishDate]="searchItem.snippet.publishedAt"
->
+<mat-card class="card" [appColorizeByPublishDate]="searchItem.snippet.publishedAt">
   <div class="content__container">
     <img
       mat-card-image
       [src]="searchItem.snippet.thumbnails.high.url"
-      [width]="searchItem.snippet.thumbnails.default.width"
-      [height]="searchItem.snippet.thumbnails.default.height"
+      [width]="searchItem.snippet.thumbnails.high.width"
+      [height]="searchItem.snippet.thumbnails.high.height"
     />
     <mat-card-content>
       <section class="statistics">
@@ -37,22 +34,8 @@
     </mat-card-header>
     <div class="actions">
       <mat-card-actions class="action">
-        <button
-          mat-button
-          class="action__button"
-          color="primary"
-          (click)="onShowDetailedInfo()"
-        >
-          More
-        </button>
-        <button
-          mat-button
-          class="action__button"
-          color="primary"
-          (click)="onDelete()"
-        >
-          Delete
-        </button>
+        <button mat-button class="action__button" color="primary" (click)="onShowDetailedInfo()">More</button>
+        <button mat-button class="action__button" color="primary" (click)="onDelete()">Delete</button>
       </mat-card-actions>
     </div>
   </div>

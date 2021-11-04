@@ -15,11 +15,11 @@ export class SearchItemComponent {
 
   constructor(private router: Router, private readonly store: Store) {}
 
-  onShowDetailedInfo() {
+  onShowDetailedInfo(): void {
     this.router.navigate([`youtube/detailed-info/${this.searchItem.id}`]);
   }
 
-  onDelete() {
+  onDelete(): void {
     this.store.dispatch(deleteVideo({ id: this.searchItem.id }));
   }
 }

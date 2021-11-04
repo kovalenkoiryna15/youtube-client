@@ -5,4 +5,5 @@ export interface VideoInfo {
   id: string;
   snippet: VideoSnippet;
   statistics: VideoStatistics;
+  source: string;
 }

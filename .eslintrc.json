@@ -38,7 +38,8 @@
         "no-underscore-dangle": ["error", { "allowAfterThis": true }],
         "no-return-assign": ["error", "except-parens"],
         "import/prefer-default-export": "off",
-        "max-len": ["error", { "code": 140, "ignoreUrls": true }]
+        "max-len": "off",
+        "prettier/prettier": 0
       }
     },
     {
@@ -47,7 +48,7 @@
         "plugin:@angular-eslint/template/recommended"
       ],
       "rules": {
-        "max-len": ["error", { "code": 140 }]
+        "max-len": ["error", { "code": 120 }]
       }
     },
     {

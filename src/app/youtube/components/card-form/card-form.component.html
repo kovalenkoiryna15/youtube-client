@@ -1,34 +1,17 @@
 <form class="card-form" [formGroup]="cardFormGroup" (ngSubmit)="onSubmit()">
   <mat-form-field class="card-form__field">
     <mat-label>Title</mat-label>
-    <input
-      type="text"
-      autocomplete="off"
-      matInput
-      formControlName="title"
-      maxlength="10"
-    />
+    <input type="text" autocomplete="off" matInput formControlName="title" maxlength="10" />
     <mat-error
-      *ngIf="
-        cardFormGroup.controls.title.hasError('whitespace') &&
-        !cardFormGroup.controls.title.hasError('required')
-      "
+      *ngIf="cardFormGroup.controls.title.hasError('whitespace') && !cardFormGroup.controls.title.hasError('required')"
     >
       Please enter a valid title.
     </mat-error>
-    <mat-error *ngIf="cardFormGroup.controls.title.hasError('required')">
-      Title is required.
-    </mat-error>
+    <mat-error *ngIf="cardFormGroup.controls.title.hasError('required')"> Title is required. </mat-error>
   </mat-form-field>
   <mat-form-field class="card-form__field">
     <mat-label>Description</mat-label>
-    <input
-      type="description"
-      autocomplete="off"
-      matInput
-      formControlName="description"
-      maxlength="10"
-    />
+    <input type="description" autocomplete="off" matInput formControlName="description" maxlength="10" />
     <mat-error
       *ngIf="
         cardFormGroup.controls.description.hasError('whitespace') &&
@@ -37,11 +20,37 @@
     >
       Please enter a valid description.
     </mat-error>
-    <mat-error *ngIf="cardFormGroup.controls.description.hasError('required')">
-      Description is required.
-    </mat-error>
+    <mat-error *ngIf="cardFormGroup.controls.description.hasError('required')"> Description is required. </mat-error>
   </mat-form-field>
-  <button mat-button type="submit" class="card-form__button_submit">
-    Create
-  </button>
+  <mat-form-field class="card-form__field">
+    <mat-label>Thumbnail URL</mat-label>
+    <input type="thumbnailUrl" autocomplete="off" matInput formControlName="thumbnailUrl" />
+    <mat-error
+      *ngIf="
+        cardFormGroup.controls.thumbnailUrl.hasError('whitespace') &&
+        !cardFormGroup.controls.thumbnailUrl.hasError('required')
+      "
+    >
+      Please enter a valid thumbnail URL.
+    </mat-error>
+    <mat-error *ngIf="cardFormGroup.controls.thumbnailUrl.hasError('required')"> Thumbnail URL is required. </mat-error>
+  </mat-form-field>
+  <mat-form-field class="card-form__field">
+    <mat-label>Tags</mat-label>
+    <mat-chip-list #chipList formControlName="tags">
+      <mat-chip *ngFor="let chip of formData.tags" [selectable]="true" [removable]="true" (removed)="removeChip(chip)">
+        {{ chip }}
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+      <input
+        placeholder="Tipe and press Space"
+        autocomplete="off"
+        [matChipInputFor]="chipList"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        (matChipInputTokenEnd)="addChip($event)"
+      />
+    </mat-chip-list>
+    <mat-error *ngIf="cardFormGroup.controls.tags.hasError('tagsrequired')"> Tags are required. </mat-error>
+  </mat-form-field>
+  <button mat-button type="submit" class="card-form__button_submit">Create</button>
 </form>

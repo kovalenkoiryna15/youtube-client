@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { SettingsService, VideoService } from 'src/app/core/services';
-import { FilterOption, SearchItemModel, SortOption, SettingsOptionsStatus, CardFormData } from 'src/app/shared/models';
+import { FilterOption, SearchItemModel, SortOption, SettingsOptionsStatus } from 'src/app/shared/models';
 import { FilterOptions, SortOptions } from 'src/app/shared/constants/settings';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -23,7 +23,7 @@ export class SearchResultComponent implements OnDestroy {
 
   public searchResultList: SearchItemModel[] = [];
 
-  public customVideoList: (VideoInfo | CardFormData)[] = [];
+  public customVideoList: VideoInfo [] = [];
 
   public currentPage!: string;
 
